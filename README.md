@@ -1,7 +1,5 @@
 # The Strivers' Network
 
-Made with the official [Payload Website Template](https://github.com/payloadcms/payload/blob/main/templates/website). 
-
 Core features:
 
 - [Pre-configured Payload Config](#how-it-works)
