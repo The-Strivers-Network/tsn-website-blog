@@ -1,7 +1,7 @@
 {
-  "name": "with-vercel-website",
-  "version": "1.0.0",
-  "description": "Website template for Payload",
+  "name": "tsn-website-blog",
+  "version": "0.0.1",
+  "description": "The Strivers' Network",
   "license": "MIT",
   "type": "module",
   "scripts": {
