@@ -24,6 +24,7 @@ import admin from '@/access/admin';
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
+  trash: true,
   access: {
     create: admin,
     delete: admin,
