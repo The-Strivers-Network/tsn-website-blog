@@ -1,27 +1,28 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
 import {
   FixedToolbarFeature,
   InlineToolbarFeature,
   lexicalEditor,
-} from '@payloadcms/richtext-lexical'
-import path from 'path'
-import { fileURLToPath } from 'url'
+} from '@payloadcms/richtext-lexical';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-import { anyone } from '../access/anyone'
-import { authenticated } from '../access/authenticated'
+import admin from '@/access/admin';
+import author from '@/access/author';
+import { anyone } from '../../access/anyone';
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 export const Media: CollectionConfig = {
   slug: 'media',
   folders: true,
   access: {
-    create: authenticated,
-    delete: authenticated,
+    create: author,
+    delete: admin,
     read: anyone,
-    update: authenticated,
+    update: author,
   },
   fields: [
     {
@@ -34,7 +35,7 @@ export const Media: CollectionConfig = {
       type: 'richText',
       editor: lexicalEditor({
         features: ({ rootFeatures }) => {
-          return [...rootFeatures, FixedToolbarFeature(), InlineToolbarFeature()]
+          return [...rootFeatures, FixedToolbarFeature(), InlineToolbarFeature()];
         },
       }),
     },
@@ -78,4 +79,4 @@ export const Media: CollectionConfig = {
       },
     ],
   },
-}
+};
