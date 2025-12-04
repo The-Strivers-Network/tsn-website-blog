@@ -85,7 +85,7 @@ export interface Config {
   };
   collectionsJoins: {
     'payload-folders': {
-      documentsAndFolders: 'payload-folders' | 'media';
+      documentsAndFolders: 'payload-folders' | 'posts' | 'media';
     };
   };
   collectionsSelect: {
@@ -264,6 +264,7 @@ export interface Post {
    */
   generateSlug?: boolean | null;
   slug: string;
+  folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -376,6 +377,10 @@ export interface FolderInterface {
           value: number | FolderInterface;
         }
       | {
+          relationTo?: 'posts';
+          value: number | Post;
+        }
+      | {
           relationTo?: 'media';
           value: number | Media;
         }
@@ -383,7 +388,7 @@ export interface FolderInterface {
     hasNextPage?: boolean;
     totalDocs?: number;
   };
-  folderType?: 'media'[] | null;
+  folderType?: ('posts' | 'media')[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1214,6 +1219,7 @@ export interface PostsSelect<T extends boolean = true> {
       };
   generateSlug?: T;
   slug?: T;
+  folder?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

@@ -31,6 +31,7 @@ import author from '@/access/author';
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
+  folders: true,
   access: {
     create: author,
     delete: admin,
