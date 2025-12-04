@@ -1,11 +1,10 @@
 import type { CollectionConfig } from 'payload';
 
-import { authenticated } from '../../access/authenticated';
-import { protectRoles } from './hooks/protectRoles';
-import admin from '../../access/admin';
-import author from '../../access/author';
-import { checkRole } from './hooks/checkRole';
 import { User } from '@/payload-types';
+import admin from '../../access/admin';
+import { authenticated } from '../../access/authenticated';
+import { checkRole } from './hooks/checkRole';
+import { protectRoles } from './hooks/protectRoles';
 
 export const Users: CollectionConfig = {
   slug: 'users',
