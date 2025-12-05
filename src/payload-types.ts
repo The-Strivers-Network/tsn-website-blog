@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     pages: Page;
     posts: Post;
+    comments: Comment;
     media: Media;
     categories: Category;
     users: User;
@@ -85,12 +86,13 @@ export interface Config {
   };
   collectionsJoins: {
     'payload-folders': {
-      documentsAndFolders: 'payload-folders' | 'posts' | 'media';
+      documentsAndFolders: 'payload-folders' | 'posts' | 'comments' | 'media';
     };
   };
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    comments: CommentsSelect<false> | CommentsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -384,6 +386,10 @@ export interface FolderInterface {
           value: number | Post;
         }
       | {
+          relationTo?: 'comments';
+          value: number | Comment;
+        }
+      | {
           relationTo?: 'media';
           value: number | Media;
         }
@@ -391,9 +397,30 @@ export interface FolderInterface {
     hasNextPage?: boolean;
     totalDocs?: number;
   };
-  folderType?: ('posts' | 'media')[] | null;
+  folderType?: ('posts' | 'comments' | 'media')[] | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "comments".
+ */
+export interface Comment {
+  id: number;
+  author: {
+    name: string;
+    email: string;
+  };
+  content: string;
+  post: number | Post;
+  /**
+   * Toggle to change the visibility of the comment.
+   */
+  isApproved?: boolean | null;
+  createdAt: string;
+  folder?: (number | null) | FolderInterface;
+  updatedAt: string;
+  deletedAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -987,6 +1014,10 @@ export interface PayloadLockedDocument {
         value: number | Post;
       } | null)
     | ({
+        relationTo: 'comments';
+        value: number | Comment;
+      } | null)
+    | ({
         relationTo: 'media';
         value: number | Media;
       } | null)
@@ -1228,6 +1259,25 @@ export interface PostsSelect<T extends boolean = true> {
   createdAt?: T;
   deletedAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "comments_select".
+ */
+export interface CommentsSelect<T extends boolean = true> {
+  author?:
+    | T
+    | {
+        name?: T;
+        email?: T;
+      };
+  content?: T;
+  post?: T;
+  isApproved?: T;
+  createdAt?: T;
+  folder?: T;
+  updatedAt?: T;
+  deletedAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
