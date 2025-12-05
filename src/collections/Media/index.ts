@@ -25,6 +25,9 @@ export const Media: CollectionConfig = {
     read: anyone,
     update: author,
   },
+  admin: {
+    group: 'Blog Content',
+  },
   fields: [
     {
       name: 'alt',
@@ -46,6 +49,9 @@ export const Media: CollectionConfig = {
     staticDir: path.resolve(dirname, '../../public/media'),
     adminThumbnail: 'thumbnail',
     focalPoint: true,
+    formatOptions: {
+      format: 'webp',
+    },
     imageSizes: [
       {
         name: 'thumbnail',

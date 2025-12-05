@@ -14,6 +14,9 @@ export const Comments: CollectionConfig = {
     read: authenticatedOrPublished,
     update: admin,
   },
+  admin: {
+    group: 'Blog Content',
+  },
   fields: [
     {
       name: 'author',
