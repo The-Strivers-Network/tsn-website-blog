@@ -94,8 +94,9 @@ export const plugins: Plugin[] = [
     },
   }),
   searchPlugin({
-    collections: ['posts'],
+    collections: ['posts', 'pages'],
     beforeSync: beforeSyncWithSearch,
+    defaultPriorities: { pages: 1, posts: 2 },
     searchOverrides: {
       fields: ({ defaultFields }) => {
         return [...defaultFields, ...searchFields];
