@@ -95,7 +95,8 @@ const config = {
       },
       fontFamily: {
         mono: ['ui-monospace', 'SF Mono', 'Consolas', 'monospace'],
-        sans: ['Gotham', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        sans: ['var(--font-inter)', 'sans-serif'],
+        title: ['Gotham', 'sans-serif'],
       },
       keyframes: {
         'accordion-down': {
