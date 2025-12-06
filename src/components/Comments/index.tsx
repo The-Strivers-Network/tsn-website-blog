@@ -6,7 +6,7 @@ import { CommentForm } from './CommentForm';
 import RichText from '@/components/RichText';
 import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical';
 
-export const Comments = async ({ postId }: { postId: string }) => {
+export const Comments = async ({ postId }: { postId: number }) => {
   const payload = await getPayload({ config: configPromise });
   const { docs: comments } = await payload.find({
     collection: 'comments',

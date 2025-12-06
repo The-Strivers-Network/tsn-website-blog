@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { CommentEditor } from './CommentEditor';
 import type { EditorState } from 'lexical';
 
-export const CommentForm = ({ postId }: { postId: string }) => {
+export const CommentForm = ({ postId }: { postId: number }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [editorState, setEditorState] = useState<EditorState | null>(null);
