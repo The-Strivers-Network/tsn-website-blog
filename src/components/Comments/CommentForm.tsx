@@ -69,7 +69,7 @@ export const CommentForm = ({ postId }: { postId: string }) => {
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.errors?.[0]?.message || 'Failed to submit comment');
+        throw new Error(error.errors?.[0]?.message || 'Failed to post comment');
       }
 
       setName('');
@@ -79,7 +79,7 @@ export const CommentForm = ({ postId }: { postId: string }) => {
       setSuccess(true);
     } catch (error) {
       setError(
-        error instanceof Error ? error.message : 'Failed to submit comment. Please try again.'
+        error instanceof Error ? error.message : 'Failed to post comment. Please try again.'
       );
       console.error(error);
     } finally {
@@ -116,10 +116,18 @@ export const CommentForm = ({ postId }: { postId: string }) => {
         <Label htmlFor="content">Comment</Label>
         <CommentEditor onChange={handleEditorChange} resetKey={resetKey} />
       </div>
-      {error && <div className="text-red-500">{error}</div>}
-      {success && <div className="text-green-500">Comment submitted successfully!</div>}
+      {error && (
+        <div className="border border-error bg-error/30 text-foreground py-3 px-4 rounded flex items-center gap-2">
+          <span>{error}</span>
+        </div>
+      )}
+      {success && (
+        <div className="border border-success bg-success/30 text-foreground py-3 px-4 rounded flex items-center gap-2">
+          <span>Comment posted successfully!</span>
+        </div>
+      )}
       <Button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? 'Submitting...' : 'Submit Comment '}
+        {isSubmitting ? 'Posting...' : 'Post Comment'}
       </Button>
     </form>
   );
