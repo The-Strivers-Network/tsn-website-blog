@@ -8,6 +8,10 @@ import { protectRoles } from './hooks/protectRoles';
 
 export const Users: CollectionConfig = {
   slug: 'users',
+  labels: {
+    singular: 'User',
+    plural: 'Users',
+  },
   access: {
     create: admin,
     delete: admin,

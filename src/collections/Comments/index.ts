@@ -12,6 +12,10 @@ import {
 
 export const Comments: CollectionConfig = {
   slug: 'comments',
+  labels: {
+    singular: 'Comment',
+    plural: 'Comments',
+  },
   folders: true,
   trash: true,
   access: {
