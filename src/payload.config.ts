@@ -92,8 +92,8 @@ export default buildConfig({
     tasks: [],
   },
   email: resendAdapter({
-    defaultFromAddress: 'dev@payloadcms.com',
-    defaultFromName: 'Payload CMS',
+    defaultFromAddress: 'noreply@mail.thestriversnetwork.org',
+    defaultFromName: 'The Striver\'s Network',
     apiKey: process.env.RESEND_API_KEY || '',
   }),
 });
