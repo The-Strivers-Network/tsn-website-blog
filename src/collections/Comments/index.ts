@@ -1,14 +1,22 @@
 import admin from '@/access/admin';
 import { anyone } from '@/access/anyone';
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished';
-import type { CollectionConfig } from 'payload';
 import {
+  BlockquoteFeature,
   BoldFeature,
+  FixedToolbarFeature,
+  HeadingFeature,
+  HorizontalRuleFeature,
+  IndentFeature,
   ItalicFeature,
+  OrderedListFeature,
   ParagraphFeature,
+  StrikethroughFeature,
   UnderlineFeature,
+  UnorderedListFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical';
+import type { CollectionConfig } from 'payload';
 
 export const Comments: CollectionConfig = {
   slug: 'comments',
@@ -49,7 +57,20 @@ export const Comments: CollectionConfig = {
       type: 'richText',
       required: true,
       editor: lexicalEditor({
-        features: [ParagraphFeature(), BoldFeature(), ItalicFeature(), UnderlineFeature()],
+        features: [
+          HeadingFeature({ enabledHeadingSizes: ['h3', 'h4'] }),
+          FixedToolbarFeature(),
+          HorizontalRuleFeature(),
+          ParagraphFeature(),
+          BoldFeature(),
+          ItalicFeature(),
+          UnderlineFeature(),
+          StrikethroughFeature(),
+          UnorderedListFeature(),
+          OrderedListFeature(),
+          BlockquoteFeature(),
+          IndentFeature(),
+        ],
       }),
     },
 

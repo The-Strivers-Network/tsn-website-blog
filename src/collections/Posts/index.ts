@@ -1,12 +1,20 @@
 import type { CollectionConfig } from 'payload';
 
 import {
+  AlignFeature,
+  BlockquoteFeature,
   BlocksFeature,
   FixedToolbarFeature,
   HeadingFeature,
   HorizontalRuleFeature,
+  IndentFeature,
   InlineToolbarFeature,
   lexicalEditor,
+  OrderedListFeature,
+  StrikethroughFeature,
+  SubscriptFeature,
+  SuperscriptFeature,
+  UnorderedListFeature
 } from '@payloadcms/richtext-lexical';
 
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished';
@@ -101,6 +109,14 @@ export const Posts: CollectionConfig<'posts'> = {
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),
+                    StrikethroughFeature(),
+                    SubscriptFeature(),
+                    SuperscriptFeature(),
+                    AlignFeature(),
+                    IndentFeature(),
+                    UnorderedListFeature(),
+                    OrderedListFeature(),
+                    BlockquoteFeature(),
                   ];
                 },
               }),

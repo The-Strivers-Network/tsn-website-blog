@@ -35,15 +35,18 @@ export const CommentForm = ({ postId }: { postId: number }) => {
     // Convert editor state to the format Payload expects
     const editorJSON = editorState.toJSON();
 
-    // Check if content is empty
-    const hasContent = editorJSON.root.children.some((child: any) => {
-      if (child.type === 'paragraph' && child.children) {
-        return child.children.some(
-          (textNode: any) => textNode.text && textNode.text.trim().length > 0
-        );
+    // Check if content is empty (recursively check for text content in all node types)
+    const hasTextContent = (node: any): boolean => {
+      if (node.text && node.text.trim().length > 0) {
+        return true;
+      }
+      if (node.children && Array.isArray(node.children)) {
+        return node.children.some((child: any) => hasTextContent(child));
       }
       return false;
-    });
+    };
+
+    const hasContent = editorJSON.root.children.some((child: any) => hasTextContent(child));
 
     if (!hasContent) {
       setError('Please write a comment');

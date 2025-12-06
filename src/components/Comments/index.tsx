@@ -26,7 +26,8 @@ export const Comments = async ({ postId }: { postId: number }) => {
               <RichText
                 data={comment.content as DefaultTypedEditorState}
                 enableGutter={false}
-                enableProse={false}
+                enableProse={true}
+                className="prose-sm"
               />
             )}
             <div className="font-bold mt-4">{comment.author?.name}</div>
