@@ -256,7 +256,7 @@ export interface Post {
     description?: string | null;
   };
   publishedAt?: string | null;
-  authors?: (number | User)[] | null;
+  authors: (number | User)[];
   populatedAuthors?:
     | {
         id?: string | null;
