@@ -1,8 +1,14 @@
 import admin from '@/access/admin';
 import { anyone } from '@/access/anyone';
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished';
-import { Sidebar } from 'lucide-react';
 import type { CollectionConfig } from 'payload';
+import {
+  BoldFeature,
+  ItalicFeature,
+  ParagraphFeature,
+  UnderlineFeature,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical';
 
 export const Comments: CollectionConfig = {
   slug: 'comments',
@@ -36,14 +42,11 @@ export const Comments: CollectionConfig = {
     },
     {
       name: 'content',
-      type: 'textarea',
+      type: 'richText',
       required: true,
-      validate: (string) => {
-        if (!string || string.length < 10) {
-          return 'Your comment must be at least 10 characters long';
-        }
-        return true;
-      },
+      editor: lexicalEditor({
+        features: [ParagraphFeature(), BoldFeature(), ItalicFeature(), UnderlineFeature()],
+      }),
     },
 
     {

@@ -412,7 +412,21 @@ export interface Comment {
     name: string;
     email: string;
   };
-  content: string;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   post: number | Post;
   /**
    * Toggle to change the visibility of the comment.

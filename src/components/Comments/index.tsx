@@ -3,6 +3,8 @@ import { getPayload } from 'payload';
 import configPromise from '@payload-config';
 import type { Comment } from '@/payload-types';
 import { CommentForm } from './CommentForm';
+import RichText from '@/components/RichText';
+import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical';
 
 export const Comments = async ({ postId }: { postId: string }) => {
   const payload = await getPayload({ config: configPromise });
@@ -20,7 +22,13 @@ export const Comments = async ({ postId }: { postId: string }) => {
       <div className="space-y-4 mb-24">
         {(comments as Comment[]).map((comment) => (
           <div key={comment.id} className="p-4 border rounded">
-            <p>{comment.content}</p>
+            {comment.content && (
+              <RichText
+                data={comment.content as DefaultTypedEditorState}
+                enableGutter={false}
+                enableProse={false}
+              />
+            )}
             <div className="font-bold mt-4">{comment.author?.name}</div>
             <div className="text-sm text-gray-500">{comment.createdAt}</div>
           </div>
