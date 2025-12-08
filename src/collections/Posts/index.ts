@@ -14,7 +14,7 @@ import {
   StrikethroughFeature,
   SubscriptFeature,
   SuperscriptFeature,
-  UnorderedListFeature
+  UnorderedListFeature,
 } from '@payloadcms/richtext-lexical';
 
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished';
@@ -26,7 +26,7 @@ import { populateAuthors } from './hooks/populateAuthors';
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost';
 
 import admin from '@/access/admin';
-import author from '@/access/author';
+import author, { authorUpdate } from '@/access/author';
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -46,9 +46,9 @@ export const Posts: CollectionConfig<'posts'> = {
   trash: true,
   access: {
     create: author,
-    delete: admin,
+    delete: authorUpdate,
     read: authenticatedOrPublished,
-    update: author,
+    update: authorUpdate,
   },
   // This config controls what's populated by default when a post is referenced
   // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
