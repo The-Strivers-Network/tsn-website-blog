@@ -35,7 +35,7 @@ export const Search: React.FC = () => {
     if (q && q !== value) {
       setValue(q);
     }
-  }, []);
+  }, [searchParams]);
 
   return (
     <div>

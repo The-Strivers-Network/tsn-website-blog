@@ -25,7 +25,6 @@ import { generatePreviewPath } from '../../utilities/generatePreviewPath';
 import { populateAuthors } from './hooks/populateAuthors';
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost';
 
-import admin from '@/access/admin';
 import author, { authorUpdate } from '@/access/author';
 import {
   MetaDescriptionField,
