@@ -25,6 +25,7 @@ const dirname = path.dirname(filename);
 
 export default buildConfig({
   admin: {
+    avatar: 'gravatar',
     components: {
       graphics: {
         Logo: '/graphics/Logo/index.tsx#Logos',
