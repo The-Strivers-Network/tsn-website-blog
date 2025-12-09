@@ -18,13 +18,31 @@ import { plugins } from './plugins';
 import { defaultLexical } from '@/fields/defaultLexical';
 import { getServerSideURL } from './utilities/getURL';
 import { resendAdapter } from '@payloadcms/email-resend';
+import { Settings } from './Settings/config';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
   admin: {
-    components: {},
+    components: {
+      graphics: {
+        Logo: '/graphics/Logo/index.tsx#Logos',
+        Icon: '/graphics/Icon/index.tsx#Icons',
+      },
+    },
+    meta: {
+      icons: [
+        {
+          fetchPriority: 'high',
+          sizes: 'any',
+          type: 'image/jpg',
+          rel: 'icon',
+          url: '/favicon.jpg',
+        },
+      ],
+      titleSuffix: ' | TSN',
+    },
     importMap: {
       baseDir: path.resolve(dirname),
     },
@@ -61,7 +79,7 @@ export default buildConfig({
   }),
   collections: [Pages, Posts, Comments, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
+  globals: [Header, Footer, Settings],
   plugins: [
     ...plugins,
     vercelBlobStorage({
@@ -93,7 +111,7 @@ export default buildConfig({
   },
   email: resendAdapter({
     defaultFromAddress: 'noreply@mail.thestriversnetwork.org',
-    defaultFromName: 'The Striver\'s Network',
+    defaultFromName: "The Striver's Network",
     apiKey: process.env.RESEND_API_KEY || '',
   }),
 });
