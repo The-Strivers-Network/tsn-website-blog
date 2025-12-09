@@ -31,6 +31,13 @@ export default buildConfig({
         Logo: '/graphics/Logo/index.tsx#Logos',
         Icon: '/graphics/Icon/index.tsx#Icons',
       },
+      views: {
+        analytics: {
+          Component: '@/components/AnalyticsView/index.tsx#AnalyticsView',
+          path: '/analytics',
+        },
+      },
+      afterNavLinks: ['@/components/AfterNavLinks/index.tsx#AfterNavLinks'],
     },
     meta: {
       icons: [
