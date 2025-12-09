@@ -435,6 +435,10 @@ export interface Comment {
   };
   post: number | Post;
   /**
+   * Reply to another comment (one level deep only)
+   */
+  parent?: (number | null) | Comment;
+  /**
    * Toggle to change the visibility of the comment.
    */
   isApproved?: boolean | null;
@@ -1299,6 +1303,7 @@ export interface CommentsSelect<T extends boolean = true> {
       };
   content?: T;
   post?: T;
+  parent?: T;
   isApproved?: T;
   createdAt?: T;
   folder?: T;

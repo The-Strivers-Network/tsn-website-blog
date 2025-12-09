@@ -84,6 +84,15 @@ export const Comments: CollectionConfig = {
       },
     },
     {
+      name: 'parent',
+      type: 'relationship',
+      relationTo: 'comments',
+      admin: {
+        position: 'sidebar',
+        description: 'Reply to another comment (one level deep only)',
+      },
+    },
+    {
       name: 'isApproved',
       type: 'checkbox',
       defaultValue: true,
