@@ -15,6 +15,7 @@ import { generateMeta } from '@/utilities/generateMeta';
 import PageClient from './page.client';
 import { LivePreviewListener } from '@/components/LivePreviewListener';
 import { Comments } from '@/components/Comments';
+import { ToTopButton } from '@/components/ToTopButton';
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise });
@@ -62,7 +63,7 @@ export default async function Post({ params: paramsPromise }: Args) {
       {draft && <LivePreviewListener />}
 
       <PostHero post={post} />
-
+      <ToTopButton />
       <div className="flex flex-col items-center gap-4 pt-8">
         <div className="container">
           <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
