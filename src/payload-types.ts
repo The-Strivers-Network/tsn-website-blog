@@ -266,6 +266,10 @@ export interface Post {
       }[]
     | null;
   /**
+   * Estimated reading time in minutes (auto-calculated)
+   */
+  readingTime?: number | null;
+  /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
   generateSlug?: boolean | null;
@@ -1273,6 +1277,7 @@ export interface PostsSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  readingTime?: T;
   generateSlug?: T;
   slug?: T;
   folder?: T;

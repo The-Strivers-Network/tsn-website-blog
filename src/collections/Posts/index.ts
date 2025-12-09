@@ -23,6 +23,7 @@ import { Code } from '../../blocks/Code/config';
 import { MediaBlock } from '../../blocks/MediaBlock/config';
 import { generatePreviewPath } from '../../utilities/generatePreviewPath';
 import { populateAuthors } from './hooks/populateAuthors';
+import { populateReadingTime } from './hooks/populateReadingTime';
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost';
 
 import author, { authorUpdate } from '@/access/author';
@@ -56,6 +57,7 @@ export const Posts: CollectionConfig<'posts'> = {
     title: true,
     slug: true,
     categories: true,
+    readingTime: true,
     meta: {
       image: true,
       description: true,
@@ -237,6 +239,18 @@ export const Posts: CollectionConfig<'posts'> = {
           type: 'text',
         },
       ],
+    },
+    {
+      name: 'readingTime',
+      type: 'number',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        description: 'Estimated reading time in minutes (auto-calculated)',
+      },
+      hooks: {
+        beforeChange: [populateReadingTime],
+      },
     },
     slugField(),
   ],
