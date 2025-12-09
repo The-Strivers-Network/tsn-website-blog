@@ -42,7 +42,9 @@ export default buildConfig({
           url: '/favicon.jpg',
         },
       ],
+      title: 'Dashboard',
       titleSuffix: ' | TSN',
+      description: "PayloadCMS Dashboard for the The Striver's Network",
     },
     importMap: {
       baseDir: path.resolve(dirname),
