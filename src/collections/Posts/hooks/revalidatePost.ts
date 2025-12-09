@@ -17,6 +17,10 @@ export const revalidatePost: CollectionAfterChangeHook<Post> = ({
 
       revalidatePath(path)
       revalidateTag('posts-sitemap')
+
+      // Revalidate posts archive pages
+      revalidatePath('/posts', 'page')
+      payload.logger.info(`Revalidating posts archive`)
     }
 
     // If the post was previously published, we need to revalidate the old path
@@ -27,17 +31,30 @@ export const revalidatePost: CollectionAfterChangeHook<Post> = ({
 
       revalidatePath(oldPath)
       revalidateTag('posts-sitemap')
+
+      // Revalidate posts archive pages when unpublishing
+      revalidatePath('/posts', 'page')
+      payload.logger.info(`Revalidating posts archive after unpublish`)
     }
   }
   return doc
 }
 
-export const revalidateDelete: CollectionAfterDeleteHook<Post> = ({ doc, req: { context } }) => {
+export const revalidateDelete: CollectionAfterDeleteHook<Post> = ({
+  doc,
+  req: { payload, context },
+}) => {
   if (!context.disableRevalidate) {
     const path = `/posts/${doc?.slug}`
 
+    payload.logger.info(`Revalidating deleted post at path: ${path}`)
+
     revalidatePath(path)
     revalidateTag('posts-sitemap')
+
+    // Revalidate posts archive pages after deletion
+    revalidatePath('/posts', 'page')
+    payload.logger.info(`Revalidating posts archive after delete`)
   }
 
   return doc

@@ -88,7 +88,13 @@ export default buildConfig({
     },
   }),
   collections: [Pages, Posts, Comments, Media, Categories, Users],
-  cors: [getServerSideURL()].filter(Boolean),
+  cors: [
+    getServerSideURL(),
+    // Allow Vercel preview deployments
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '',
+    // Allow branch preview deployments
+    process.env.VERCEL_BRANCH_URL ? `https://${process.env.VERCEL_BRANCH_URL}` : '',
+  ].filter(Boolean),
   globals: [Header, Footer, Settings],
   plugins: [
     ...plugins,
