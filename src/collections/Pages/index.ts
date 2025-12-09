@@ -1,33 +1,38 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
-import { authenticated } from '../../access/authenticated'
-import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
-import { Archive } from '../../blocks/ArchiveBlock/config'
-import { CallToAction } from '../../blocks/CallToAction/config'
-import { Content } from '../../blocks/Content/config'
-import { FormBlock } from '../../blocks/Form/config'
-import { MediaBlock } from '../../blocks/MediaBlock/config'
-import { hero } from '@/heros/config'
-import { slugField } from 'payload'
-import { populatePublishedAt } from '../../hooks/populatePublishedAt'
-import { generatePreviewPath } from '../../utilities/generatePreviewPath'
-import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
+import { hero } from '@/heros/config';
+import { slugField } from 'payload';
+import { authenticatedOrPublished } from '../../access/authenticatedOrPublished';
+import { Archive } from '../../blocks/ArchiveBlock/config';
+import { CallToAction } from '../../blocks/CallToAction/config';
+import { Content } from '../../blocks/Content/config';
+import { FormBlock } from '../../blocks/Form/config';
+import { MediaBlock } from '../../blocks/MediaBlock/config';
+import { populatePublishedAt } from '../../hooks/populatePublishedAt';
+import { generatePreviewPath } from '../../utilities/generatePreviewPath';
+import { revalidateDelete, revalidatePage } from './hooks/revalidatePage';
 
+import admin from '@/access/admin';
 import {
   MetaDescriptionField,
   MetaImageField,
   MetaTitleField,
   OverviewField,
   PreviewField,
-} from '@payloadcms/plugin-seo/fields'
+} from '@payloadcms/plugin-seo/fields';
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
+  labels: {
+    singular: 'Page',
+    plural: 'Pages',
+  },
+  trash: true,
   access: {
-    create: authenticated,
-    delete: authenticated,
+    create: admin,
+    delete: admin,
     read: authenticatedOrPublished,
-    update: authenticated,
+    update: admin,
   },
   // This config controls what's populated by default when a page is referenced
   // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
@@ -133,4 +138,4 @@ export const Pages: CollectionConfig<'pages'> = {
     },
     maxPerDoc: 50,
   },
-}
+};

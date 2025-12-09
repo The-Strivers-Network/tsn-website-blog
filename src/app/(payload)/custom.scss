@@ -1,0 +1,17 @@
+/* Override Payload Admin font */
+:root {
+  --font-body: var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Consolas', monospace;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+html[data-theme='dark'] .light-mode-image {
+  display: none;
+}
+
+html[data-theme='light'] .dark-mode-image {
+  display: none;
+}

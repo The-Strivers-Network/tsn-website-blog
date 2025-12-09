@@ -1,27 +1,36 @@
-import type { Metadata } from 'next'
+import type { Metadata } from 'next';
 
-import { cn } from '@/utilities/ui'
-import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
-import React from 'react'
+import React from 'react';
 
-import { AdminBar } from '@/components/AdminBar'
-import { Footer } from '@/Footer/Component'
-import { Header } from '@/Header/Component'
-import { Providers } from '@/providers'
-import { InitTheme } from '@/providers/Theme/InitTheme'
-import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
-import { draftMode } from 'next/headers'
+import { AdminBar } from '@/components/AdminBar';
+import { Footer } from '@/Footer/Component';
+import { Header } from '@/Header/Component';
+import { Providers } from '@/providers';
+import { InitTheme } from '@/providers/Theme/InitTheme';
+import { mergeOpenGraph } from '@/utilities/mergeOpenGraph';
+import { draftMode } from 'next/headers';
 
-import './globals.css'
-import { getServerSideURL } from '@/utilities/getURL'
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
+import { Inter } from 'next/font/google';
+
+import './globals.css';
+import { getServerSideURL } from '@/utilities/getURL';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+});
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const { isEnabled } = await draftMode()
+  const { isEnabled } = await draftMode();
 
   return (
-    <html className={cn(GeistSans.variable, GeistMono.variable)} lang="en" suppressHydrationWarning>
+    <html className={inter.variable} lang="en" suppressHydrationWarning>
       <head>
+        <GoogleAnalytics />
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
@@ -37,10 +46,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Header />
           {children}
           <Footer />
+          <Analytics />
+          <SpeedInsights />
         </Providers>
       </body>
     </html>
-  )
+  );
 }
 
 export const metadata: Metadata = {
@@ -50,4 +61,4 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     creator: '@payloadcms',
   },
-}
+};

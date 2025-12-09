@@ -1,39 +1,54 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
 import {
+  AlignFeature,
+  BlockquoteFeature,
   BlocksFeature,
   FixedToolbarFeature,
   HeadingFeature,
   HorizontalRuleFeature,
+  IndentFeature,
   InlineToolbarFeature,
   lexicalEditor,
-} from '@payloadcms/richtext-lexical'
+  OrderedListFeature,
+  StrikethroughFeature,
+  SubscriptFeature,
+  SuperscriptFeature,
+  UnorderedListFeature,
+} from '@payloadcms/richtext-lexical';
 
-import { authenticated } from '../../access/authenticated'
-import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
-import { Banner } from '../../blocks/Banner/config'
-import { Code } from '../../blocks/Code/config'
-import { MediaBlock } from '../../blocks/MediaBlock/config'
-import { generatePreviewPath } from '../../utilities/generatePreviewPath'
-import { populateAuthors } from './hooks/populateAuthors'
-import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
+import { authenticatedOrPublished } from '../../access/authenticatedOrPublished';
+import { Banner } from '../../blocks/Banner/config';
+import { Code } from '../../blocks/Code/config';
+import { MediaBlock } from '../../blocks/MediaBlock/config';
+import { generatePreviewPath } from '../../utilities/generatePreviewPath';
+import { populateAuthors } from './hooks/populateAuthors';
+import { populateReadingTime } from './hooks/populateReadingTime';
+import { revalidateDelete, revalidatePost } from './hooks/revalidatePost';
 
+import author, { authorUpdate } from '@/access/author';
 import {
   MetaDescriptionField,
   MetaImageField,
   MetaTitleField,
   OverviewField,
   PreviewField,
-} from '@payloadcms/plugin-seo/fields'
-import { slugField } from 'payload'
+} from '@payloadcms/plugin-seo/fields';
+import { slugField } from 'payload';
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
+  labels: {
+    singular: 'Post',
+    plural: 'Posts',
+  },
+  folders: true,
+  trash: true,
   access: {
-    create: authenticated,
-    delete: authenticated,
+    create: author,
+    delete: authorUpdate,
     read: authenticatedOrPublished,
-    update: authenticated,
+    update: authorUpdate,
   },
   // This config controls what's populated by default when a post is referenced
   // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
@@ -42,6 +57,7 @@ export const Posts: CollectionConfig<'posts'> = {
     title: true,
     slug: true,
     categories: true,
+    readingTime: true,
     meta: {
       image: true,
       description: true,
@@ -64,6 +80,7 @@ export const Posts: CollectionConfig<'posts'> = {
         req,
       }),
     useAsTitle: 'title',
+    group: 'Blog Content',
   },
   fields: [
     {
@@ -93,7 +110,15 @@ export const Posts: CollectionConfig<'posts'> = {
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),
-                  ]
+                    StrikethroughFeature(),
+                    SubscriptFeature(),
+                    SuperscriptFeature(),
+                    AlignFeature(),
+                    IndentFeature(),
+                    UnorderedListFeature(),
+                    OrderedListFeature(),
+                    BlockquoteFeature(),
+                  ];
                 },
               }),
               label: false,
@@ -115,7 +140,7 @@ export const Posts: CollectionConfig<'posts'> = {
                   id: {
                     not_in: [id],
                   },
-                }
+                };
               },
               hasMany: true,
               relationTo: 'posts',
@@ -174,9 +199,9 @@ export const Posts: CollectionConfig<'posts'> = {
         beforeChange: [
           ({ siblingData, value }) => {
             if (siblingData._status === 'published' && !value) {
-              return new Date()
+              return new Date();
             }
-            return value
+            return value;
           },
         ],
       },
@@ -189,6 +214,7 @@ export const Posts: CollectionConfig<'posts'> = {
       },
       hasMany: true,
       relationTo: 'users',
+      required: true,
     },
     // This field is only used to populate the user data via the `populateAuthors` hook
     // This is because the `user` collection has access control locked to protect user privacy
@@ -214,6 +240,18 @@ export const Posts: CollectionConfig<'posts'> = {
         },
       ],
     },
+    {
+      name: 'readingTime',
+      type: 'number',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        description: 'Estimated reading time in minutes (auto-calculated)',
+      },
+      hooks: {
+        beforeChange: [populateReadingTime],
+      },
+    },
     slugField(),
   ],
   hooks: {
@@ -230,4 +268,4 @@ export const Posts: CollectionConfig<'posts'> = {
     },
     maxPerDoc: 50,
   },
-}
+};

@@ -94,8 +94,9 @@ const config = {
         warning: 'hsl(var(--warning))',
       },
       fontFamily: {
-        mono: ['var(--font-geist-mono)'],
-        sans: ['var(--font-geist-sans)'],
+        mono: ['ui-monospace', 'SF Mono', 'Consolas', 'monospace'],
+        sans: ['var(--font-inter)', 'sans-serif'],
+        title: ['Gotham', 'sans-serif'],
       },
       keyframes: {
         'accordion-down': {

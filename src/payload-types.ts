@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     pages: Page;
     posts: Post;
+    comments: Comment;
     media: Media;
     categories: Category;
     users: User;
@@ -85,12 +86,13 @@ export interface Config {
   };
   collectionsJoins: {
     'payload-folders': {
-      documentsAndFolders: 'payload-folders' | 'media';
+      documentsAndFolders: 'payload-folders' | 'posts' | 'comments' | 'media';
     };
   };
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    comments: CommentsSelect<false> | CommentsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -108,13 +110,16 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
+  fallbackLocale: null;
   globals: {
     header: Header;
     footer: Footer;
+    settings: Setting;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    settings: SettingsSelect<false> | SettingsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -216,6 +221,7 @@ export interface Page {
   slug: string;
   updatedAt: string;
   createdAt: string;
+  deletedAt?: string | null;
   _status?: ('draft' | 'published') | null;
 }
 /**
@@ -252,7 +258,7 @@ export interface Post {
     description?: string | null;
   };
   publishedAt?: string | null;
-  authors?: (number | User)[] | null;
+  authors: (number | User)[];
   populatedAuthors?:
     | {
         id?: string | null;
@@ -260,12 +266,18 @@ export interface Post {
       }[]
     | null;
   /**
+   * Estimated reading time in minutes (auto-calculated)
+   */
+  readingTime?: number | null;
+  /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
   generateSlug?: boolean | null;
   slug: string;
+  folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
+  deletedAt?: string | null;
   _status?: ('draft' | 'published') | null;
 }
 /**
@@ -293,6 +305,7 @@ export interface Media {
   folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
+  deletedAt?: string | null;
   url?: string | null;
   thumbnailURL?: string | null;
   filename?: string | null;
@@ -376,6 +389,14 @@ export interface FolderInterface {
           value: number | FolderInterface;
         }
       | {
+          relationTo?: 'posts';
+          value: number | Post;
+        }
+      | {
+          relationTo?: 'comments';
+          value: number | Comment;
+        }
+      | {
           relationTo?: 'media';
           value: number | Media;
         }
@@ -383,9 +404,48 @@ export interface FolderInterface {
     hasNextPage?: boolean;
     totalDocs?: number;
   };
-  folderType?: 'media'[] | null;
+  folderType?: ('posts' | 'comments' | 'media')[] | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "comments".
+ */
+export interface Comment {
+  id: number;
+  author: {
+    name: string;
+    email: string;
+  };
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  post: number | Post;
+  /**
+   * Reply to another comment (one level deep only)
+   */
+  parent?: (number | null) | Comment;
+  /**
+   * Toggle to change the visibility of the comment.
+   */
+  isApproved?: boolean | null;
+  createdAt: string;
+  folder?: (number | null) | FolderInterface;
+  updatedAt: string;
+  deletedAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -418,6 +478,7 @@ export interface Category {
 export interface User {
   id: number;
   name?: string | null;
+  roles?: ('admin' | 'author' | 'user')[] | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -831,10 +892,15 @@ export interface Search {
   id: number;
   title?: string | null;
   priority?: number | null;
-  doc: {
-    relationTo: 'posts';
-    value: number | Post;
-  };
+  doc:
+    | {
+        relationTo: 'posts';
+        value: number | Post;
+      }
+    | {
+        relationTo: 'pages';
+        value: number | Page;
+      };
   slug?: string | null;
   meta?: {
     title?: string | null;
@@ -977,6 +1043,10 @@ export interface PayloadLockedDocument {
         value: number | Post;
       } | null)
     | ({
+        relationTo: 'comments';
+        value: number | Comment;
+      } | null)
+    | ({
         relationTo: 'media';
         value: number | Media;
       } | null)
@@ -1099,6 +1169,7 @@ export interface PagesSelect<T extends boolean = true> {
   slug?: T;
   updatedAt?: T;
   createdAt?: T;
+  deletedAt?: T;
   _status?: T;
 }
 /**
@@ -1210,11 +1281,34 @@ export interface PostsSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  readingTime?: T;
   generateSlug?: T;
   slug?: T;
+  folder?: T;
   updatedAt?: T;
   createdAt?: T;
+  deletedAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "comments_select".
+ */
+export interface CommentsSelect<T extends boolean = true> {
+  author?:
+    | T
+    | {
+        name?: T;
+        email?: T;
+      };
+  content?: T;
+  post?: T;
+  parent?: T;
+  isApproved?: T;
+  createdAt?: T;
+  folder?: T;
+  updatedAt?: T;
+  deletedAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1226,6 +1320,7 @@ export interface MediaSelect<T extends boolean = true> {
   folder?: T;
   updatedAt?: T;
   createdAt?: T;
+  deletedAt?: T;
   url?: T;
   thumbnailURL?: T;
   filename?: T;
@@ -1336,6 +1431,7 @@ export interface CategoriesSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  roles?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -1688,6 +1784,19 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings".
+ */
+export interface Setting {
+  id: number;
+  lightModeIcon?: (number | null) | Media;
+  lightModeLogo?: (number | null) | Media;
+  darkModeIcon?: (number | null) | Media;
+  darkModeLogo?: (number | null) | Media;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1728,6 +1837,19 @@ export interface FooterSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings_select".
+ */
+export interface SettingsSelect<T extends boolean = true> {
+  lightModeIcon?: T;
+  lightModeLogo?: T;
+  darkModeIcon?: T;
+  darkModeLogo?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
