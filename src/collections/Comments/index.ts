@@ -17,6 +17,7 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical';
 import type { CollectionConfig } from 'payload';
+import { revalidateComment, revalidateCommentDelete } from './hooks/revalidateComment';
 
 export const Comments: CollectionConfig = {
   slug: 'comments',
@@ -110,4 +111,8 @@ export const Comments: CollectionConfig = {
       },
     },
   ],
+  hooks: {
+    afterChange: [revalidateComment],
+    afterDelete: [revalidateCommentDelete],
+  },
 };
