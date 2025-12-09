@@ -1,6 +1,6 @@
 import admin from '@/access/admin';
 import { anyone } from '@/access/anyone';
-import { authenticatedOrPublished } from '@/access/authenticatedOrPublished';
+import { authenticatedOrApproved } from '@/access/authenticatedOrApproved';
 import {
   BlockquoteFeature,
   BoldFeature,
@@ -30,7 +30,7 @@ export const Comments: CollectionConfig = {
   access: {
     create: anyone,
     delete: admin,
-    read: authenticatedOrPublished,
+    read: authenticatedOrApproved,
     update: admin,
   },
   admin: {
