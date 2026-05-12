@@ -205,7 +205,20 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | BentoBlock
+    | FAQBlock
+    | ParagraphBlock
+    | ScrollItemsBlock
+    | StatsBlock
+    | TeamBlock
+    | TestimonialsBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -843,6 +856,137 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BentoBlock".
+ */
+export interface BentoBlock {
+  /**
+   * Optional badge label shown above the heading
+   */
+  badge?: string | null;
+  heading: string;
+  description?: string | null;
+  items: {
+    heading: string;
+    description?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'bento';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQBlock".
+ */
+export interface FAQBlock {
+  heading: string;
+  description?: string | null;
+  /**
+   * Label for the contact/CTA button
+   */
+  ctaLabel?: string | null;
+  items: {
+    question: string;
+    answer: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faqBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ParagraphBlock".
+ */
+export interface ParagraphBlock {
+  /**
+   * Text that animates word-by-word on scroll
+   */
+  text: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'paragraph';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ScrollItemsBlock".
+ */
+export interface ScrollItemsBlock {
+  heading?: string | null;
+  items: {
+    label: string;
+    image?: (number | null) | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'scrollItems';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsBlock".
+ */
+export interface StatsBlock {
+  items: {
+    /**
+     * The main stat number or value, e.g. "500,000" or "$523,520"
+     */
+    value: string;
+    /**
+     * Change indicator, e.g. "+20.1%" or "-2%"
+     */
+    change?: string | null;
+    /**
+     * Descriptive label, e.g. "Monthly active users"
+     */
+    label: string;
+    trend?: ('up' | 'down') | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'statsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamBlock".
+ */
+export interface TeamBlock {
+  groups: {
+    /**
+     * Group label, e.g. "Leadership", "Engineering"
+     */
+    groupName: string;
+    members: {
+      name: string;
+      role?: string | null;
+      avatar?: (number | null) | Media;
+      id?: string | null;
+    }[];
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teamBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialsBlock".
+ */
+export interface TestimonialsBlock {
+  heading?: string | null;
+  items: {
+    quote: string;
+    authorName: string;
+    authorAvatar?: (number | null) | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1158,6 +1302,13 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        bento?: T | BentoBlockSelect<T>;
+        faqBlock?: T | FAQBlockSelect<T>;
+        paragraph?: T | ParagraphBlockSelect<T>;
+        scrollItems?: T | ScrollItemsBlockSelect<T>;
+        statsBlock?: T | StatsBlockSelect<T>;
+        teamBlock?: T | TeamBlockSelect<T>;
+        testimonials?: T | TestimonialsBlockSelect<T>;
       };
   meta?:
     | T
@@ -1255,6 +1406,123 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BentoBlock_select".
+ */
+export interface BentoBlockSelect<T extends boolean = true> {
+  badge?: T;
+  heading?: T;
+  description?: T;
+  items?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQBlock_select".
+ */
+export interface FAQBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  ctaLabel?: T;
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ParagraphBlock_select".
+ */
+export interface ParagraphBlockSelect<T extends boolean = true> {
+  text?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ScrollItemsBlock_select".
+ */
+export interface ScrollItemsBlockSelect<T extends boolean = true> {
+  heading?: T;
+  items?:
+    | T
+    | {
+        label?: T;
+        image?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsBlock_select".
+ */
+export interface StatsBlockSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        value?: T;
+        change?: T;
+        label?: T;
+        trend?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamBlock_select".
+ */
+export interface TeamBlockSelect<T extends boolean = true> {
+  groups?:
+    | T
+    | {
+        groupName?: T;
+        members?:
+          | T
+          | {
+              name?: T;
+              role?: T;
+              avatar?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialsBlock_select".
+ */
+export interface TestimonialsBlockSelect<T extends boolean = true> {
+  heading?: T;
+  items?:
+    | T
+    | {
+        quote?: T;
+        authorName?: T;
+        authorAvatar?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

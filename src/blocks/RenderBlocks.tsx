@@ -3,17 +3,31 @@ import React, { Fragment } from 'react'
 import type { Page } from '@/payload-types'
 
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
+import { BentoBlock } from '@/blocks/Bento/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
+import { FAQBlock } from '@/blocks/FAQBlock/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { ParagraphBlock } from '@/blocks/Paragraph/Component'
+import { ScrollItemsBlock } from '@/blocks/ScrollItems/Component'
+import { StatsBlock } from '@/blocks/StatsBlock/Component'
+import { TeamBlock } from '@/blocks/TeamBlock/Component'
+import { TestimonialsBlock } from '@/blocks/Testimonials/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
+  bento: BentoBlock,
   content: ContentBlock,
   cta: CallToActionBlock,
+  faqBlock: FAQBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
+  paragraph: ParagraphBlock,
+  scrollItems: ScrollItemsBlock,
+  statsBlock: StatsBlock,
+  teamBlock: TeamBlock,
+  testimonials: TestimonialsBlock,
 }
 
 export const RenderBlocks: React.FC<{
