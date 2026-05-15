@@ -236,7 +236,7 @@ export const AnalyticsClient: React.FC = () => {
                   color: 'var(--theme-text-dark)',
                 }}
                 labelFormatter={(value) => formatTooltipDate(value, period)}
-                formatter={(value: number) => [`${formatNumber(value)} visitors`]}
+                formatter={(value) => [`${formatNumber(value as number)} visitors`]}
                 separator=""
               />
               <Area
