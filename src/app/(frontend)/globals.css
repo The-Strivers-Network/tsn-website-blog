@@ -169,3 +169,13 @@ html[data-theme='dark'],
 html[data-theme='light'] {
   opacity: initial;
 }
+
+@keyframes analytics-pulse {
+  0%   { box-shadow: 0 0 0 0   rgba(16, 185, 129, 0.7); }
+  70%  { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);   }
+  100% { box-shadow: 0 0 0 0   rgba(16, 185, 129, 0);   }
+}
+
+.animate-analytics-pulse {
+  animation: analytics-pulse 2s infinite;
+}
