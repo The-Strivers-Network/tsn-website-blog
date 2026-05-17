@@ -5,6 +5,21 @@ export const StatsBlock: Block = {
   interfaceName: 'StatsBlock',
   fields: [
     {
+      name: 'badge',
+      type: 'text',
+      admin: {
+        description: 'Optional badge label shown above the heading',
+      },
+    },
+    {
+      name: 'heading',
+      type: 'text',
+    },
+    {
+      name: 'description',
+      type: 'textarea',
+    },
+    {
       name: 'items',
       type: 'array',
       required: true,

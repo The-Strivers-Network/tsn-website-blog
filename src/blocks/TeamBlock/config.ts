@@ -5,6 +5,21 @@ export const TeamBlock: Block = {
   interfaceName: 'TeamBlock',
   fields: [
     {
+      name: 'badge',
+      type: 'text',
+      admin: {
+        description: 'Optional badge label shown above the heading',
+      },
+    },
+    {
+      name: 'heading',
+      type: 'text',
+    },
+    {
+      name: 'description',
+      type: 'textarea',
+    },
+    {
       name: 'groups',
       type: 'array',
       required: true,

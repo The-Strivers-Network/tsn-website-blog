@@ -11,16 +11,16 @@ export const BentoBlock: React.FC<BentoBlockProps> = (props) => {
     <div className="w-full py-20 lg:py-40">
       <div className="container mx-auto">
         <div className="flex flex-col gap-10">
-          <div className="flex gap-4 flex-col items-start">
+          <div className="flex gap-4 flex-col">
             {badge && (
               <div>
-                <Badge>{badge}</Badge>
+                <Badge variant="outline">{badge}</Badge>
               </div>
             )}
             <div className="flex gap-2 flex-col">
-              <h2 className="text-3xl md:text-5xl tracking-tighter max-w-xl font-regular text-left">
+              <h4 className="text-3xl md:text-5xl tracking-tighter max-w-xl text-left font-regular">
                 {heading}
-              </h2>
+              </h4>
               {description && (
                 <p className="text-lg max-w-xl lg:max-w-lg leading-relaxed tracking-tight text-muted-foreground text-left">
                   {description}

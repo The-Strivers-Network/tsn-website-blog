@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/accordion'
 
 export const FAQBlock: React.FC<FAQBlockProps> = (props) => {
-  const { heading, description, ctaLabel, items } = props
+  const { badge, heading, description, ctaLabel, items } = props
 
   return (
     <div className="w-full py-20 lg:py-40">
@@ -21,9 +21,11 @@ export const FAQBlock: React.FC<FAQBlockProps> = (props) => {
         <div className="grid lg:grid-cols-2 gap-10">
           <div className="flex gap-10 flex-col">
             <div className="flex gap-4 flex-col">
-              <div>
-                <Badge variant="outline">FAQ</Badge>
-              </div>
+              {badge && (
+                <div>
+                  <Badge variant="outline">{badge}</Badge>
+                </div>
+              )}
               <div className="flex gap-2 flex-col">
                 <h4 className="text-3xl md:text-5xl tracking-tighter max-w-xl text-left font-regular">
                   {heading}

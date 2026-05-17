@@ -3,12 +3,34 @@ import { MoveDownLeft, MoveUpRight } from 'lucide-react'
 
 import type { StatsBlock as StatsBlockProps } from '@/payload-types'
 
+import { Badge } from '@/components/ui/badge'
+
 export const StatsBlock: React.FC<StatsBlockProps> = (props) => {
-  const { items } = props
+  const { badge, heading, description, items } = props
 
   return (
     <div className="w-full py-20 lg:py-40">
       <div className="container mx-auto">
+        <div className="flex flex-col gap-10">
+          <div className="flex gap-4 flex-col">
+            {badge && (
+              <div>
+                <Badge variant="outline">{badge}</Badge>
+              </div>
+            )}
+            <div className="flex gap-2 flex-col">
+              {heading && (
+                <h4 className="text-3xl md:text-5xl tracking-tighter max-w-xl text-left font-regular">
+                  {heading}
+                </h4>
+              )}
+              {description && (
+                <p className="text-lg max-w-xl lg:max-w-lg leading-relaxed tracking-tight text-muted-foreground text-left">
+                  {description}
+                </p>
+              )}
+            </div>
+          </div>
         <div className="grid text-left grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 w-full gap-4 lg:gap-8">
           {items?.map((item, index) => (
             <div key={index} className="flex gap-0 flex-col justify-between p-6 border rounded-md">
@@ -30,6 +52,7 @@ export const StatsBlock: React.FC<StatsBlockProps> = (props) => {
               </p>
             </div>
           ))}
+        </div>
         </div>
       </div>
     </div>

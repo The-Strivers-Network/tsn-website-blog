@@ -5,6 +5,13 @@ export const FAQBlock: Block = {
   interfaceName: 'FAQBlock',
   fields: [
     {
+      name: 'badge',
+      type: 'text',
+      admin: {
+        description: 'Optional badge label shown above the heading',
+      },
+    },
+    {
       name: 'heading',
       type: 'text',
       required: true,

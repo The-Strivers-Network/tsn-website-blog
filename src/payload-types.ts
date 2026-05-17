@@ -879,6 +879,10 @@ export interface BentoBlock {
  * via the `definition` "FAQBlock".
  */
 export interface FAQBlock {
+  /**
+   * Optional badge label shown above the heading
+   */
+  badge?: string | null;
   heading: string;
   description?: string | null;
   /**
@@ -912,7 +916,12 @@ export interface ParagraphBlock {
  * via the `definition` "ScrollItemsBlock".
  */
 export interface ScrollItemsBlock {
+  /**
+   * Optional badge label shown above the heading
+   */
+  badge?: string | null;
   heading?: string | null;
+  description?: string | null;
   items: {
     label: string;
     image?: (number | null) | Media;
@@ -927,6 +936,12 @@ export interface ScrollItemsBlock {
  * via the `definition` "StatsBlock".
  */
 export interface StatsBlock {
+  /**
+   * Optional badge label shown above the heading
+   */
+  badge?: string | null;
+  heading?: string | null;
+  description?: string | null;
   items: {
     /**
      * The main stat number or value, e.g. "500,000" or "$523,520"
@@ -952,6 +967,12 @@ export interface StatsBlock {
  * via the `definition` "TeamBlock".
  */
 export interface TeamBlock {
+  /**
+   * Optional badge label shown above the heading
+   */
+  badge?: string | null;
+  heading?: string | null;
+  description?: string | null;
   groups: {
     /**
      * Group label, e.g. "Leadership", "Engineering"
@@ -974,7 +995,12 @@ export interface TeamBlock {
  * via the `definition` "TestimonialsBlock".
  */
 export interface TestimonialsBlock {
+  /**
+   * Optional badge label shown above the heading
+   */
+  badge?: string | null;
   heading?: string | null;
+  description?: string | null;
   items: {
     quote: string;
     authorName: string;
@@ -1432,6 +1458,7 @@ export interface BentoBlockSelect<T extends boolean = true> {
  * via the `definition` "FAQBlock_select".
  */
 export interface FAQBlockSelect<T extends boolean = true> {
+  badge?: T;
   heading?: T;
   description?: T;
   ctaLabel?: T;
@@ -1459,7 +1486,9 @@ export interface ParagraphBlockSelect<T extends boolean = true> {
  * via the `definition` "ScrollItemsBlock_select".
  */
 export interface ScrollItemsBlockSelect<T extends boolean = true> {
+  badge?: T;
   heading?: T;
+  description?: T;
   items?:
     | T
     | {
@@ -1475,6 +1504,9 @@ export interface ScrollItemsBlockSelect<T extends boolean = true> {
  * via the `definition` "StatsBlock_select".
  */
 export interface StatsBlockSelect<T extends boolean = true> {
+  badge?: T;
+  heading?: T;
+  description?: T;
   items?:
     | T
     | {
@@ -1492,6 +1524,9 @@ export interface StatsBlockSelect<T extends boolean = true> {
  * via the `definition` "TeamBlock_select".
  */
 export interface TeamBlockSelect<T extends boolean = true> {
+  badge?: T;
+  heading?: T;
+  description?: T;
   groups?:
     | T
     | {
@@ -1514,7 +1549,9 @@ export interface TeamBlockSelect<T extends boolean = true> {
  * via the `definition` "TestimonialsBlock_select".
  */
 export interface TestimonialsBlockSelect<T extends boolean = true> {
+  badge?: T;
   heading?: T;
+  description?: T;
   items?:
     | T
     | {

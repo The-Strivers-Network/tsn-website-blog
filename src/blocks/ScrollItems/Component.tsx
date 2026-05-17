@@ -5,11 +5,12 @@ import React, { useEffect, useState } from 'react'
 import type { ScrollItemsBlock as ScrollItemsBlockProps } from '@/payload-types'
 import type { Media as MediaType } from '@/payload-types'
 
+import { Badge } from '@/components/ui/badge'
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { Media } from '@/components/Media'
 
 export const ScrollItemsBlock: React.FC<ScrollItemsBlockProps> = (props) => {
-  const { heading, items } = props
+  const { badge, heading, description, items } = props
 
   const [api, setApi] = useState<CarouselApi>()
   const [current, setCurrent] = useState(0)
@@ -34,11 +35,25 @@ export const ScrollItemsBlock: React.FC<ScrollItemsBlockProps> = (props) => {
     <div className="w-full py-20 lg:py-40">
       <div className="container mx-auto">
         <div className="flex flex-col gap-10">
-          {heading && (
-            <h2 className="text-xl md:text-3xl tracking-tighter lg:max-w-xl font-regular text-left">
-              {heading}
-            </h2>
-          )}
+          <div className="flex gap-4 flex-col">
+            {badge && (
+              <div>
+                <Badge variant="outline">{badge}</Badge>
+              </div>
+            )}
+            <div className="flex gap-2 flex-col">
+              {heading && (
+                <h4 className="text-3xl md:text-5xl tracking-tighter max-w-xl text-left font-regular">
+                  {heading}
+                </h4>
+              )}
+              {description && (
+                <p className="text-lg max-w-xl lg:max-w-lg leading-relaxed tracking-tight text-muted-foreground text-left">
+                  {description}
+                </p>
+              )}
+            </div>
+          </div>
           <Carousel setApi={setApi} className="w-full">
             <CarouselContent>
               {items?.map((item, index) => (
