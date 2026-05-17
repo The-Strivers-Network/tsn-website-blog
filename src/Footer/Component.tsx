@@ -24,7 +24,7 @@ export async function Footer() {
               <Logo className="invert dark:invert-0 transition-opacity hover:opacity-80" />
             </Link>
             <p className="text-sm text-muted-foreground max-w-sm">
-              A modern, flexible platform built with Payload CMS and Next.js
+              The Strivers&apos; Network is a community of students dedicated to helping each other succeed.
             </p>
           </div>
 
