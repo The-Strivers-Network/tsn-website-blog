@@ -13,22 +13,17 @@ import { draftMode } from 'next/headers';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
-import { Inter } from 'next/font/google';
+import { GeistSans } from 'geist/font/sans';
 
 import './globals.css';
 import { getServerSideURL } from '@/utilities/getURL';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-});
-
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode();
 
   return (
-    <html className={inter.variable} lang="en" suppressHydrationWarning>
+    <html className={GeistSans.variable} lang="en" suppressHydrationWarning>
       <head>
         <GoogleAnalytics />
         <InitTheme />

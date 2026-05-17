@@ -145,12 +145,12 @@ export const AnalyticsClient: React.FC = () => {
           }}
         >
           <span
+            className={realtime.visitors > 0 ? 'animate-analytics-pulse' : undefined}
             style={{
               width: '8px',
               height: '8px',
               borderRadius: '50%',
               backgroundColor: realtime.visitors > 0 ? '#10b981' : '#666',
-              animation: realtime.visitors > 0 ? 'pulse 2s infinite' : 'none',
             }}
           />
           <span>
@@ -236,7 +236,7 @@ export const AnalyticsClient: React.FC = () => {
                   color: 'var(--theme-text-dark)',
                 }}
                 labelFormatter={(value) => formatTooltipDate(value, period)}
-                formatter={(value: number) => [`${formatNumber(value)} visitors`]}
+                formatter={(value) => [`${formatNumber(value as number)} visitors`]}
                 separator=""
               />
               <Area
@@ -290,20 +290,6 @@ export const AnalyticsClient: React.FC = () => {
         )}
       </div>
 
-      {/* Pulse animation styles */}
-      <style jsx>{`
-        @keyframes pulse {
-          0% {
-            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-          }
-          70% {
-            box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
-          }
-          100% {
-            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-          }
-        }
-      `}</style>
     </div>
   );
 };

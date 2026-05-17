@@ -95,8 +95,8 @@ const config = {
       },
       fontFamily: {
         mono: ['ui-monospace', 'SF Mono', 'Consolas', 'monospace'],
-        sans: ['var(--font-inter)', 'sans-serif'],
-        title: ['Gotham', 'sans-serif'],
+        sans: ['var(--font-geist-sans)', 'sans-serif'],
+        title: ['var(--font-geist-sans)', 'sans-serif'],
       },
       keyframes: {
         'accordion-down': {

@@ -4,10 +4,17 @@ import { hero } from '@/heros/config';
 import { slugField } from 'payload';
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished';
 import { Archive } from '../../blocks/ArchiveBlock/config';
+import { Bento } from '../../blocks/Bento/config';
 import { CallToAction } from '../../blocks/CallToAction/config';
 import { Content } from '../../blocks/Content/config';
+import { FAQBlock } from '../../blocks/FAQBlock/config';
 import { FormBlock } from '../../blocks/Form/config';
 import { MediaBlock } from '../../blocks/MediaBlock/config';
+import { ParagraphBlock } from '../../blocks/Paragraph/config';
+import { ScrollItems } from '../../blocks/ScrollItems/config';
+import { StatsBlock } from '../../blocks/StatsBlock/config';
+import { TeamBlock } from '../../blocks/TeamBlock/config';
+import { Testimonials } from '../../blocks/Testimonials/config';
 import { populatePublishedAt } from '../../hooks/populatePublishedAt';
 import { generatePreviewPath } from '../../utilities/generatePreviewPath';
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage';
@@ -77,7 +84,20 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+              blocks: [
+                CallToAction,
+                Content,
+                MediaBlock,
+                Archive,
+                FormBlock,
+                Bento,
+                FAQBlock,
+                ParagraphBlock,
+                ScrollItems,
+                StatsBlock,
+                TeamBlock,
+                Testimonials,
+              ],
               required: true,
               admin: {
                 initCollapsed: true,

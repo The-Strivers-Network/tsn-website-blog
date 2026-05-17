@@ -4,8 +4,18 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { CommentEditor } from './CommentEditor';
+import dynamic from 'next/dynamic';
 import type { EditorState } from 'lexical';
+
+const CommentEditor = dynamic(
+  () => import('./CommentEditor').then((m) => ({ default: m.CommentEditor })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="min-h-[165px] border border-input rounded-lg bg-muted/30 animate-pulse" />
+    ),
+  },
+);
 
 export const CommentForm = ({ postId }: { postId: number }) => {
   const [name, setName] = useState('');
