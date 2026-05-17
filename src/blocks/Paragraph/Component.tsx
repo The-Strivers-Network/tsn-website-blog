@@ -15,11 +15,18 @@ interface WordProps {
 
 const Word: React.FC<WordProps> = ({ children, progress, range }) => {
   const opacity = useTransform(progress, range, [0, 1])
+  const blur = useTransform(progress, range, [10, 0])
+  const filter = useTransform(blur, (v) => `blur(${v}px)`)
 
   return (
-    <span className="relative mt-[12px] mr-1 text-3xl font-semibold">
+    <span className="relative mt-[12px] mr-1 text-3xl md:text-5xl">
       <span className="absolute opacity-20">{children}</span>
-      <motion.span style={{ opacity }}>{children}</motion.span>
+      <motion.span
+        style={{ opacity, filter }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+      >
+        {children}
+      </motion.span>
     </span>
   )
 }
@@ -29,7 +36,7 @@ export const ParagraphBlock: React.FC<ParagraphBlockProps> = ({ text }) => {
 
   const { scrollYProgress } = useScroll({
     target: container,
-    offset: ['start 0.9', 'start 0.25'],
+    offset: ['start 1', 'end 0.5'],
   })
 
   const words = text?.split(' ') ?? []
