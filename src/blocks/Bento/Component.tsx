@@ -32,7 +32,7 @@ export const BentoBlock: React.FC<BentoBlockProps> = (props) => {
           {items && items.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {items.map((item, index) => {
-                const isWide = index % 3 === 0 || index % 3 === 2
+                const isWide = index % 4 === 0 || index % 4 === 3
                 return (
                   <div
                     key={index}
