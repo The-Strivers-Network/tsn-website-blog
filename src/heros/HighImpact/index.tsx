@@ -7,9 +7,18 @@ import type { Page } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
+import { PixelTrail } from '@/components/ui/pixel-trail'
+import { GooeyFilter } from '@/components/ui/gooey-filter'
+import { useScreenSize } from '@/hooks/use-screen-size'
 
-export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
+export const HighImpactHero: React.FC<Page['hero']> = ({
+  links,
+  media,
+  richText,
+  enablePixelTrail,
+}) => {
   const { setHeaderTheme } = useHeaderTheme()
+  const screenSize = useScreenSize()
 
   useEffect(() => {
     setHeaderTheme('dark')
@@ -39,6 +48,22 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
       <div className="min-h-[80vh] select-none">
         {media && typeof media === 'object' && (
           <Media fill imgClassName="-z-10 object-cover" priority resource={media} />
+        )}
+        {enablePixelTrail && (
+          <>
+            <GooeyFilter id="gooey-filter-pixel-trail" strength={5} />
+            <div
+              className="absolute inset-0 z-0"
+              style={{ filter: 'url(#gooey-filter-pixel-trail)' }}
+            >
+              <PixelTrail
+                pixelSize={screenSize.lessThan('md') ? 24 : 32}
+                fadeDuration={0}
+                delay={500}
+                pixelClassName="bg-white"
+              />
+            </div>
+          </>
         )}
       </div>
     </div>

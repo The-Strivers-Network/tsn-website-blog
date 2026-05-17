@@ -67,6 +67,15 @@ export const hero: Field = {
       relationTo: 'media',
       required: true,
     },
+    {
+      name: 'enablePixelTrail',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        condition: (_, { type } = {}) => type === 'highImpact',
+        description: 'Enable gooey pixel trail mouse effect over the hero image',
+      },
+    },
   ],
   label: false,
 }

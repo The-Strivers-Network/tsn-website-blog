@@ -204,6 +204,10 @@ export interface Page {
         }[]
       | null;
     media?: (number | null) | Media;
+    /**
+     * Enable gooey pixel trail mouse effect over the hero image
+     */
+    enablePixelTrail?: boolean | null;
   };
   layout: (
     | CallToActionBlock
@@ -1319,6 +1323,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
             };
         media?: T;
+        enablePixelTrail?: T;
       };
   layout?:
     | T
