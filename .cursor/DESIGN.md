@@ -32,6 +32,23 @@ colors:
   semantic-success: "#2F9E6B"
   semantic-error: "#D14343"
   semantic-info: "#6D28D9"
+  glass-light: "rgba(255,255,255,0.55)"
+  glass-light-strong: "rgba(255,255,255,0.72)"
+  glass-lilac: "rgba(243,240,250,0.60)"
+  glass-purple-wash: "rgba(109,40,217,0.10)"
+  glass-plum: "rgba(42,30,74,0.55)"
+  glass-plum-strong: "rgba(42,30,74,0.72)"
+  glass-ink: "rgba(21,18,31,0.60)"
+  glass-border-light: "rgba(255,255,255,0.60)"
+  glass-border-dark: "rgba(255,255,255,0.12)"
+  glass-highlight: "rgba(255,255,255,0.50)"
+
+blur:
+  glass-sm: 8px
+  glass-md: 16px
+  glass-lg: 24px
+  glass-xl: 40px
+  glass-saturate: 130%
 
 typography:
   display-mega:
@@ -159,6 +176,9 @@ shadow:
   card: "0 1px 2px rgba(30,27,46,0.04), 0 8px 24px rgba(30,27,46,0.06)"
   card-hover: "0 2px 4px rgba(30,27,46,0.06), 0 16px 40px rgba(109,40,217,0.12)"
   focus-ring: "0 0 0 3px rgba(109,40,217,0.35)"
+  glass: "inset 0 1px 0 rgba(255,255,255,0.45), 0 8px 32px rgba(30,27,46,0.12)"
+  glass-plum: "inset 0 1px 0 rgba(255,255,255,0.08), 0 12px 40px rgba(0,0,0,0.35)"
+  glass-glow-hover: "inset 0 1px 0 rgba(255,255,255,0.50), 0 16px 48px rgba(109,40,217,0.20)"
 
 components:
   top-nav:
@@ -285,6 +305,43 @@ components:
     backgroundColor: transparent
     textColor: "{colors.on-plum}"
     typography: "{typography.body-sm}"
+  glass-nav:
+    backgroundColor: "{colors.glass-light-strong}"
+    backdropBlur: "{blur.glass-lg}"
+    backdropSaturate: "{blur.glass-saturate}"
+    borderColor: "{colors.glass-border-light}"
+    textColor: "{colors.ink}"
+    typography: "{typography.nav-link}"
+    height: 72px
+  glass-card:
+    backgroundColor: "{colors.glass-light}"
+    backdropBlur: "{blur.glass-md}"
+    backdropSaturate: "{blur.glass-saturate}"
+    borderColor: "{colors.glass-border-light}"
+    textColor: "{colors.ink}"
+    typography: "{typography.title-md}"
+    rounded: "{rounded.lg}"
+    padding: 24px
+    shadow: "{shadow.glass}"
+  glass-card-plum:
+    backgroundColor: "{colors.glass-plum-strong}"
+    backdropBlur: "{blur.glass-md}"
+    backdropSaturate: "{blur.glass-saturate}"
+    borderColor: "{colors.glass-border-dark}"
+    textColor: "{colors.on-plum}"
+    typography: "{typography.title-md}"
+    rounded: "{rounded.lg}"
+    padding: 24px
+    shadow: "{shadow.glass-plum}"
+  glass-panel:
+    backgroundColor: "{colors.glass-light-strong}"
+    backdropBlur: "{blur.glass-xl}"
+    backdropSaturate: "{blur.glass-saturate}"
+    borderColor: "{colors.glass-border-light}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.xl}"
+    padding: 32px
+    shadow: "{shadow.glass}"
 ---
 
 ## Overview
@@ -302,6 +359,7 @@ Type is a two-family system. **Funnel Display** (weight 500, tight negative trac
 - Deep plum inverted bands (`{colors.surface-plum}`) anchor hero, CTA, and impact sections.
 - Soft, low-spread shadow on cards — one elevation tier, warmed toward purple on hover.
 - Pill-shaped CTAs; 16px card radius; 96px section rhythm.
+- Optional **frosted-glass layer** — translucent panels with backdrop blur floated over the purple radial glows and plum bands, for atmospheric depth without adding opaque surfaces. Glass is a spotlight treatment (nav-on-scroll, hero overlays, feature/scholar cards on gradients), never the default for every card.
 
 ## Colors
 
@@ -400,7 +458,7 @@ Aspirational and open. Generous 96px section rhythm with alternating canvas / pl
 
 ## Elevation & Depth
 
-Depth is **hairline-first with one soft shadow tier** for cards. On the light canvas, cards lift on a low-spread neutral shadow; on hover, the shadow warms toward purple. Plum bands carry no shadow — they anchor depth through color inversion.
+Depth is **hairline-first with one soft shadow tier** for cards, plus an **optional frosted-glass tier** for spotlight moments. On the light canvas, cards lift on a low-spread neutral shadow; on hover, the shadow warms toward purple. Plum bands carry no shadow — they anchor depth through color inversion. Glass surfaces sit *above* a glow or image and read as a distinct, floating layer.
 
 | Level | Treatment | Use |
 |---|---|---|
@@ -408,11 +466,56 @@ Depth is **hairline-first with one soft shadow tier** for cards. On the light ca
 | Lilac panel | `{colors.surface-lilac}` | Stat cards, quiet panels |
 | Card | `{colors.surface-card}` + `{shadow.card}` | Program / feature / scholar cards |
 | Card hover | `{shadow.card-hover}` (purple-warmed) | Interactive card hover |
+| Glass | translucent fill + backdrop blur + `{shadow.glass}` | Nav-on-scroll, hero overlays, cards floated on glows/imagery |
 | Plum band | `{colors.surface-plum}` | Hero, CTA, impact — depth via inversion |
 
+Glass is the **top** of the elevation stack — reserve it for surfaces that intentionally float over something (a glow, a photo, a plum band). Don't stack glass on glass, and don't use it as a flat replacement for `card` on the plain canvas, where there is nothing behind it to refract.
+
 ### Decorative Depth
-- **Purple gradient glows** (`{colors.primary-bright}` → transparent) behind hero copy and stat bands add atmosphere without surfaces.
+- **Purple gradient glows** (`{colors.primary-bright}` → transparent) behind hero copy and stat bands add atmosphere without surfaces. These glows are also the ideal backdrop for glass — the blur refracts the color and gives the frost something to catch.
 - **Gold accents** punctuate — a single stat number, an award pill — never a full surface.
+
+## Glassmorphism
+
+Glass is an **optional, spotlight layer** — not the base aesthetic. It expresses the brand's aspirational, forward-looking voice on a few high-impact surfaces (the nav as it lifts off the hero, an overlay panel, a scholar/feature card floated on a purple glow) while the editorial canvas / plum / card system carries the rest of the page. Frosted, restrained, and warm — never heavy sci-fi glass.
+
+### The Recipe
+
+Every glass surface is the same five ingredients layered in order:
+
+1. **Translucent fill** — a `glass-*` color, not a solid. Light contexts use `{colors.glass-light}` / `{colors.glass-light-strong}`; over plum or in the dark theme use `{colors.glass-plum}` / `{colors.glass-plum-strong}` / `{colors.glass-ink}`. A faint `{colors.glass-purple-wash}` can tint the frost toward the brand.
+2. **Backdrop blur + saturate** — `backdrop-filter: blur({blur.glass-md}) saturate({blur.glass-saturate})`. Saturation boost keeps the refracted color from going gray. Pick blur by surface size: `{blur.glass-sm}` chips, `{blur.glass-md}` cards, `{blur.glass-lg}` nav, `{blur.glass-xl}` full panels/modals.
+3. **1px translucent border** — `{colors.glass-border-light}` on light glass, `{colors.glass-border-dark}` over plum/dark. This edge is what makes glass legible against a busy backdrop.
+4. **Inset top highlight** — the `inset 0 1px 0 …` in `{shadow.glass}` / `{shadow.glass-plum}` simulates a lit top rim.
+5. **Soft drop shadow** — the outer half of `{shadow.glass}`; warms to `{shadow.glass-glow-hover}` on interactive hover, consistent with the one-tier shadow philosophy.
+
+### Blur Scale
+
+| Token | Value | Use |
+|---|---|---|
+| `{blur.glass-sm}` | 8px | Chips, pills, small tags on imagery |
+| `{blur.glass-md}` | 16px | Glass cards, tiles |
+| `{blur.glass-lg}` | 24px | Sticky nav on scroll |
+| `{blur.glass-xl}` | 40px | Full overlays, modals, mobile menu sheet |
+| `{blur.glass-saturate}` | 130% | Companion `backdrop-saturate` on all of the above |
+
+### Where Glass Fits (and where it doesn't)
+
+- **Fits:** nav bar once it scrolls over the hero; a hero foreground card/stat cluster over the purple glow; feature/scholar cards laid on a gradient or photo; modal / mobile-menu sheets; toast/notification chips.
+- **Doesn't:** long-form body cards on the flat canvas (use `feature-card` / `program-card` — there's nothing behind them to refract); dense data tables and forms where text must stay razor-sharp; stacking one glass surface on another.
+
+### Accessibility & Fallbacks
+
+- **Contrast first.** Text over glass must still meet WCAG AA. Over busy imagery use the `-strong` fills (`{colors.glass-light-strong}` / `{colors.glass-plum-strong}`) and/or a subtle solid scrim behind the text. Never run body copy on a <0.55-opacity fill over a photo.
+- **`@supports` fallback.** Where `backdrop-filter` is unsupported, fall back to a solid surface — `{colors.surface-card}` on light, `{colors.surface-plum}` over plum — keeping the same border, radius, and shadow so layout is unchanged.
+- **Respect user preference.** Under `prefers-reduced-transparency: reduce` (and reduced-motion for any glow drift), swap glass for the solid fallback. The page must never depend on translucency to be readable.
+
+### Current Implementation Notes
+
+These are **spec-level tokens; they are not yet wired into `tailwind.config.mjs` / `globals.css`.** When implementing:
+- The app already runs **dark-theme-first** (`[data-theme="dark"]`), and the shipped shadcn dark tokens already use translucent borders (`--border: oklch(1 0 0 / 10%)`, `--input: oklch(1 0 0 / 15%)`) — glass sits naturally on top of that. Map `glass-border-dark` onto the existing translucent `--border`.
+- Tailwind's `backdrop-blur-*` and `backdrop-saturate-*` utilities are available out of the box (no plugin needed). The cleanest wiring is a single `.glass` / `.glass-plum` component class in `globals.css` (`@layer components`) bundling fill + `backdrop-filter` + border + `box-shadow`, with the `@supports`/`prefers-reduced-transparency` fallbacks above — then compose it with existing `rounded-lg`, `bg-*`, and spacing utilities.
+- Expose the fills as CSS variables (e.g. `--glass-light`, `--glass-plum`) alongside the current `--card` tokens so they track the active theme.
 
 ## Shapes
 
@@ -471,6 +574,16 @@ Depth is **hairline-first with one soft shadow tier** for cards. On the light ca
 
 **`university-logo-tile`** — Grayscale university logo on white, `{rounded.md}`, padding 20px. Builds credibility (Princeton, MIT, Oxford, NUS…).
 
+### Glass Surfaces (optional layer)
+
+Frosted variants for surfaces that float over a glow, photo, or plum band. See **Glassmorphism** for the full recipe and fallbacks.
+
+**`glass-nav`** — The top nav once it scrolls off the hero. Fill `{colors.glass-light-strong}`, `backdrop-blur` `{blur.glass-lg}` + saturate, 1px `{colors.glass-border-light}` bottom edge. At the very top of the page the nav is the flat `top-nav`; it transitions to `glass-nav` on scroll.
+
+**`glass-card`** — A feature or scholar card laid on a purple glow or image. Fill `{colors.glass-light}`, `backdrop-blur` `{blur.glass-md}`, border `{colors.glass-border-light}`, `{rounded.lg}`, `{shadow.glass}`; hover lifts to `{shadow.glass-glow-hover}`. Use `glass-card-plum` (fill `{colors.glass-plum-strong}`, border `{colors.glass-border-dark}`, text `{colors.on-plum}`) when floated on a plum band or in dark theme.
+
+**`glass-panel`** — Larger overlay surface: modal, dialog, or mobile-menu sheet. Fill `{colors.glass-light-strong}`, `backdrop-blur` `{blur.glass-xl}`, `{rounded.xl}`, padding 32px, `{shadow.glass}`.
+
 ### Pills & Labels
 
 **`eyebrow-label`** — Section opener. Transparent, text `{colors.primary}`, type `{typography.eyebrow}` (Geist Mono, uppercase, 1.2px tracking).
@@ -500,6 +613,7 @@ Depth is **hairline-first with one soft shadow tier** for cards. On the light ca
 - Open sections with a Geist Mono eyebrow.
 - Alternate canvas and plum bands to pace the mission → impact → involvement story.
 - Show real scholars and university logos to earn trust.
+- Reach for glass only where a surface floats over a glow, image, or plum band — and always over a solid-fallback + AA-contrast safety net.
 
 ### Don't
 - Don't set body or small labels in Funnel Display — it's a display face only.
@@ -508,6 +622,8 @@ Depth is **hairline-first with one soft shadow tier** for cards. On the light ca
 - Don't use hard drop shadows; keep the single soft, low-spread purple-warmed tier.
 - Don't put purple text on gold or gold text on purple — use ink on gold, white on purple.
 - Don't use pure white (#FFFFFF) as the full-page floor; the violet-tinted canvas is the base.
+- Don't over-glass: no glass on the flat canvas with nothing behind it, no glass on glass, and no glass behind dense body text, tables, or forms.
+- Don't let translucency break legibility — if text can't hold AA over the frost, use a `-strong` fill or a scrim, and always ship the `@supports` / `prefers-reduced-transparency` solid fallback.
 
 ## Responsive Behavior
 
@@ -539,6 +655,7 @@ Depth is **hairline-first with one soft shadow tier** for cards. On the light ca
 5. Funnel Display 500 for display + stats; Geist 400/500/600 for the rest; Geist Mono for eyebrows/labels.
 6. Purple stays the single brand action color; gold stays scarce and achievement-scoped.
 7. One soft shadow tier — warm it toward purple only on interactive hover.
+8. Glass is a spotlight layer, not a default — float it over a glow/image/plum band, always with a solid fallback and AA-safe text.
 
 ## Known Gaps
 
@@ -546,4 +663,5 @@ Depth is **hairline-first with one soft shadow tier** for cards. On the light ca
 - Illustration / photography art-direction guidelines (student portrait treatment, duotone rules) not yet specified.
 - Data-viz palette for impact dashboards (reach by district, scholarship totals) beyond the two brand colors is undefined.
 - Blog / long-form article typography scale is inherited from body tokens but not fully specified.
-- Dark mode not defined; plum bands approximate inverted surfaces for now.
+- Dark mode: the app currently ships **dark-theme-first** via shadcn tokens (`[data-theme="dark"]`), which the spec's plum/ink surfaces approximate but do not yet fully formalize as a parallel token set. The `glass-plum` / `glass-ink` fills are the dark-context glass; a full light↔dark token mapping is still to be specified.
+- Glass timings/motion (nav frost fade-in on scroll, hover glow lift) are out of scope here — see Animation gap above.
