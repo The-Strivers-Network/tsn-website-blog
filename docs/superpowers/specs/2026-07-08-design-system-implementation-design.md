@@ -63,7 +63,7 @@ them as plain `var(--x)`. Delete the dead `.dark` block.
 | `--muted` | `#241D3A`; foreground on-plum-muted `#B7ABD6` |
 | `--accent` | lifted plum `#3A2C5E`; foreground on-plum |
 | `--border` | `rgba(183,171,214,0.16)` (translucent, plum-tinted) |
-| `--input` | same family, slightly stronger |
+| `--input` | `rgba(183,171,214,0.24)` |
 | `--ring` | `rgba(139,92,246,0.40)` |
 
 ### Extension tokens (both themes, CSS vars + `tailwind.extend.colors`)
@@ -175,7 +175,7 @@ muted · cards → `bg-card rounded-lg` + hairline border + `shadow-card`, hover
 | ScholarCaseStudy / ScholarList | `badge` field renders as gold **award-pill**; ScholarList rows keep hairline dividers, purple link hover |
 | TeamBlock | hairline dividers; group labels as Geist Mono eyebrows |
 | Banner | semantic colors re-pointed at spec success/error/info |
-| Heros (`src/heros`) | hero-band: purple radial glow (`primary-bright` → transparent) behind headline; `display-mega` responsive 68→52→36; `body-lg` subhead; pill CTAs; media `rounded-xl`; HighImpact may invert to plum |
+| Heros (`src/heros`) | hero-band: purple radial glow (`primary-bright` → transparent) behind headline; `display-mega` responsive 68→52→36; `body-lg` subhead; pill CTAs; media `rounded-xl`; HighImpact hero uses the plum inversion (`hero-band-plum`) |
 
 ### Pages
 
@@ -188,7 +188,8 @@ uniform pass only.
 
 Two component classes in `globals.css` (`@layer components`), per the DESIGN.md recipe:
 
-- `.glass` — `--glass-light` fill, `backdrop-filter: blur(16–24px) saturate(130%)`,
+- `.glass` — `--glass-light` fill, `backdrop-filter: blur(16px) saturate(130%)` as the
+  default; placements override blur with Tailwind utilities (nav 24px, sheet 40px).
   1px `--glass-border-light`, `shadow-glass` (inset highlight + soft drop).
 - `.glass-plum` — `--glass-plum-strong` fill, `--glass-border-dark`, `shadow-glass-plum`.
   Used over plum bands and as dark-theme glass.
