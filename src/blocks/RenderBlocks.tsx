@@ -10,6 +10,7 @@ import { FAQBlock } from '@/blocks/FAQBlock/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { ParagraphBlock } from '@/blocks/Paragraph/Component'
+import { ScholarCaseStudyBlock } from '@/blocks/ScholarCaseStudy/Component'
 import { ScrollItemsBlock } from '@/blocks/ScrollItems/Component'
 import { StatsBlock } from '@/blocks/StatsBlock/Component'
 import { TeamBlock } from '@/blocks/TeamBlock/Component'
@@ -24,6 +25,7 @@ const blockComponents = {
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
   paragraph: ParagraphBlock,
+  scholarCaseStudy: ScholarCaseStudyBlock,
   scrollItems: ScrollItemsBlock,
   statsBlock: StatsBlock,
   teamBlock: TeamBlock,

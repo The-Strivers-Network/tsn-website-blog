@@ -11,6 +11,7 @@ import { FAQBlock } from '../../blocks/FAQBlock/config';
 import { FormBlock } from '../../blocks/Form/config';
 import { MediaBlock } from '../../blocks/MediaBlock/config';
 import { ParagraphBlock } from '../../blocks/Paragraph/config';
+import { ScholarCaseStudy } from '../../blocks/ScholarCaseStudy/config';
 import { ScrollItems } from '../../blocks/ScrollItems/config';
 import { StatsBlock } from '../../blocks/StatsBlock/config';
 import { TeamBlock } from '../../blocks/TeamBlock/config';
@@ -93,6 +94,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 Bento,
                 FAQBlock,
                 ParagraphBlock,
+                ScholarCaseStudy,
                 ScrollItems,
                 StatsBlock,
                 TeamBlock,

@@ -218,6 +218,7 @@ export interface Page {
     | BentoBlock
     | FAQBlock
     | ParagraphBlock
+    | ScholarCaseStudyBlock
     | ScrollItemsBlock
     | StatsBlock
     | TeamBlock
@@ -917,6 +918,44 @@ export interface ParagraphBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ScholarCaseStudyBlock".
+ */
+export interface ScholarCaseStudyBlock {
+  /**
+   * Optional badge label shown above the scholar name
+   */
+  badge?: string | null;
+  scholarName: string;
+  /**
+   * School, university, or field of study
+   */
+  school?: string | null;
+  image?: (number | null) | Media;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Which side the portrait sits on. Alternate across stacked blocks.
+   */
+  imagePosition?: ('left' | 'right') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'scholarCaseStudy';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ScrollItemsBlock".
  */
 export interface ScrollItemsBlock {
@@ -1336,6 +1375,7 @@ export interface PagesSelect<T extends boolean = true> {
         bento?: T | BentoBlockSelect<T>;
         faqBlock?: T | FAQBlockSelect<T>;
         paragraph?: T | ParagraphBlockSelect<T>;
+        scholarCaseStudy?: T | ScholarCaseStudyBlockSelect<T>;
         scrollItems?: T | ScrollItemsBlockSelect<T>;
         statsBlock?: T | StatsBlockSelect<T>;
         teamBlock?: T | TeamBlockSelect<T>;
@@ -1483,6 +1523,20 @@ export interface FAQBlockSelect<T extends boolean = true> {
  */
 export interface ParagraphBlockSelect<T extends boolean = true> {
   text?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ScholarCaseStudyBlock_select".
+ */
+export interface ScholarCaseStudyBlockSelect<T extends boolean = true> {
+  badge?: T;
+  scholarName?: T;
+  school?: T;
+  image?: T;
+  body?: T;
+  imagePosition?: T;
   id?: T;
   blockName?: T;
 }
