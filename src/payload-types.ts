@@ -219,6 +219,7 @@ export interface Page {
     | FAQBlock
     | ParagraphBlock
     | ScholarCaseStudyBlock
+    | ScholarListBlock
     | ScrollItemsBlock
     | StatsBlock
     | TeamBlock
@@ -956,6 +957,60 @@ export interface ScholarCaseStudyBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ScholarListBlock".
+ */
+export interface ScholarListBlock {
+  /**
+   * Optional badge label shown above the heading
+   */
+  badge?: string | null;
+  heading?: string | null;
+  description?: string | null;
+  /**
+   * Group scholars by cohort, university, field, etc.
+   */
+  groups: {
+    /**
+     * Group label, e.g. "Class of 2025", "Ivy League"
+     */
+    groupName: string;
+    scholars: {
+      name: string;
+      /**
+       * School or university
+       */
+      school?: string | null;
+      /**
+       * Field of study, program, or award
+       */
+      field?: string | null;
+      /**
+       * Optional link for this scholar (e.g. their case study).
+       */
+      link?: {
+        type?: ('reference' | 'custom') | null;
+        newTab?: boolean | null;
+        reference?:
+          | ({
+              relationTo: 'pages';
+              value: number | Page;
+            } | null)
+          | ({
+              relationTo: 'posts';
+              value: number | Post;
+            } | null);
+        url?: string | null;
+      };
+      id?: string | null;
+    }[];
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'scholarList';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ScrollItemsBlock".
  */
 export interface ScrollItemsBlock {
@@ -1376,6 +1431,7 @@ export interface PagesSelect<T extends boolean = true> {
         faqBlock?: T | FAQBlockSelect<T>;
         paragraph?: T | ParagraphBlockSelect<T>;
         scholarCaseStudy?: T | ScholarCaseStudyBlockSelect<T>;
+        scholarList?: T | ScholarListBlockSelect<T>;
         scrollItems?: T | ScrollItemsBlockSelect<T>;
         statsBlock?: T | StatsBlockSelect<T>;
         teamBlock?: T | TeamBlockSelect<T>;
@@ -1537,6 +1593,39 @@ export interface ScholarCaseStudyBlockSelect<T extends boolean = true> {
   image?: T;
   body?: T;
   imagePosition?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ScholarListBlock_select".
+ */
+export interface ScholarListBlockSelect<T extends boolean = true> {
+  badge?: T;
+  heading?: T;
+  description?: T;
+  groups?:
+    | T
+    | {
+        groupName?: T;
+        scholars?:
+          | T
+          | {
+              name?: T;
+              school?: T;
+              field?: T;
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

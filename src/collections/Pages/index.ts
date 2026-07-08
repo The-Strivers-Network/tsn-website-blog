@@ -12,6 +12,7 @@ import { FormBlock } from '../../blocks/Form/config';
 import { MediaBlock } from '../../blocks/MediaBlock/config';
 import { ParagraphBlock } from '../../blocks/Paragraph/config';
 import { ScholarCaseStudy } from '../../blocks/ScholarCaseStudy/config';
+import { ScholarList } from '../../blocks/ScholarList/config';
 import { ScrollItems } from '../../blocks/ScrollItems/config';
 import { StatsBlock } from '../../blocks/StatsBlock/config';
 import { TeamBlock } from '../../blocks/TeamBlock/config';
@@ -95,6 +96,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 FAQBlock,
                 ParagraphBlock,
                 ScholarCaseStudy,
+                ScholarList,
                 ScrollItems,
                 StatsBlock,
                 TeamBlock,
