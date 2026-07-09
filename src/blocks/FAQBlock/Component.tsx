@@ -3,7 +3,7 @@ import { PhoneCall } from 'lucide-react'
 
 import type { FAQBlock as FAQBlockProps } from '@/payload-types'
 
-import { Badge } from '@/components/ui/badge'
+import { Eyebrow } from '@/components/ui/eyebrow'
 import { Button } from '@/components/ui/button'
 import {
   Accordion,
@@ -16,18 +16,18 @@ export const FAQBlock: React.FC<FAQBlockProps> = (props) => {
   const { badge, heading, description, ctaLabel, items } = props
 
   return (
-    <div className="w-full py-20 lg:py-40">
+    <div className="w-full py-16 lg:py-24">
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-2 gap-10">
           <div className="flex gap-10 flex-col">
             <div className="flex gap-4 flex-col">
               {badge && (
                 <div>
-                  <Badge variant="outline">{badge}</Badge>
+                  <Eyebrow variant="pill">{badge}</Eyebrow>
                 </div>
               )}
               <div className="flex gap-2 flex-col">
-                <h4 className="text-3xl md:text-5xl tracking-tighter max-w-xl text-left font-regular">
+                <h4 className="font-display text-display-md md:text-display-lg max-w-xl text-left">
                   {heading}
                 </h4>
                 {description && (

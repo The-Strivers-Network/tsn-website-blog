@@ -3,24 +3,24 @@ import { MoveDownLeft, MoveUpRight } from 'lucide-react'
 
 import type { StatsBlock as StatsBlockProps } from '@/payload-types'
 
-import { Badge } from '@/components/ui/badge'
+import { Eyebrow } from '@/components/ui/eyebrow'
 
 export const StatsBlock: React.FC<StatsBlockProps> = (props) => {
   const { badge, heading, description, items } = props
 
   return (
-    <div className="w-full py-10 lg:py-20">
+    <div className="w-full py-16 lg:py-24">
       <div className="container mx-auto">
         <div className="flex flex-col gap-10">
           <div className="flex gap-4 flex-col">
             {badge && (
               <div>
-                <Badge variant="outline">{badge}</Badge>
+                <Eyebrow variant="pill">{badge}</Eyebrow>
               </div>
             )}
             <div className="flex gap-2 flex-col">
               {heading && (
-                <h4 className="text-3xl md:text-5xl tracking-tighter max-w-xl text-left font-regular">
+                <h4 className="font-display text-display-md md:text-display-lg max-w-xl text-left">
                   {heading}
                 </h4>
               )}

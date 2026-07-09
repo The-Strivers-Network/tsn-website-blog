@@ -38,6 +38,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
         '',
         {
           container: enableGutter,
+          'py-16 lg:py-24': enableGutter,
         },
         className,
       )}
