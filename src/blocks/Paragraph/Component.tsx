@@ -42,7 +42,7 @@ export const ParagraphBlock: React.FC<ParagraphBlockProps> = ({ text }) => {
   const words = text?.split(' ') ?? []
 
   return (
-    <p ref={container} className="flex flex-wrap leading-[0.5] p-4 container mx-auto">
+    <p ref={container} className="flex flex-wrap leading-[0.5] p-4 container mx-auto py-16 lg:py-24">
       {words.map((word, i) => {
         const start = i / words.length
         const end = start + 1 / words.length
