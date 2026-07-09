@@ -29,9 +29,19 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
       className="relative -mt-[10.4rem] flex items-center justify-center text-white"
       data-theme="dark"
     >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[5] bg-[radial-gradient(60%_50%_at_50%_35%,hsl(258_90%_66%/0.35),transparent_70%)]"
+      />
       <div className="z-10 absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="max-w-[44rem] md:text-center pointer-events-auto">
-          {richText && <RichText className="mt-12 mb-6 ml-12 mr-12" data={richText} enableGutter={false} />}
+          {richText && (
+            <RichText
+              className="mt-12 mb-6 ml-12 mr-12 [&_h1]:font-display [&_h1]:text-display-md md:[&_h1]:text-display-lg lg:[&_h1]:text-display-mega"
+              data={richText}
+              enableGutter={false}
+            />
+          )}
           {Array.isArray(links) && links.length > 0 && (
             <ul className="flex justify-center gap-4 mb-8">
               {links.map(({ link }, i) => {
