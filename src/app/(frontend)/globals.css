@@ -39,7 +39,7 @@
 
     /* hairline-soft #F0EDF7 / muted #6E6A7C */
     --muted: 258 38% 95%;
-    --muted-foreground: 253 8% 45%;
+    --muted-foreground: 253 8% 42%;
 
     /* primary-soft #EDE9FE / primary-active */
     --accent: 251 91% 95%;
@@ -147,7 +147,7 @@
     --font-sans: var(--font-sans);
   }
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring;
   }
   body {
     @apply bg-background text-foreground;

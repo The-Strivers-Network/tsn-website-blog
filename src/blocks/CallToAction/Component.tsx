@@ -7,7 +7,7 @@ import { CMSLink } from '@/components/Link'
 
 export const CallToActionBlock: React.FC<CTABlockProps> = ({ links, richText }) => {
   return (
-    <div className="w-full bg-surface-plum py-16 lg:py-24">
+    <div className="w-full bg-surface-plum py-16 lg:py-24" data-theme="dark">
       <div className="container flex flex-col items-center gap-8 text-center">
         {richText && (
           <RichText

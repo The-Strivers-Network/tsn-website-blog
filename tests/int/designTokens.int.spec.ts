@@ -62,6 +62,8 @@ const lightPairs: Pair[] = [
   ['accent-gold-foreground', 'accent-gold-soft', 4.5],
   ['primary', 'background', 3.0], // stat numbers (large text)
   ['card-foreground', 'card', 4.5],
+  ['muted-foreground', 'accent', 4.5],
+  ['muted-foreground', 'surface-lilac', 4.5],
 ]
 
 const darkPairs: Pair[] = [
