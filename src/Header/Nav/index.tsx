@@ -76,7 +76,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
         >
           <Link href="/search">
             <span className="sr-only">Search</span>
-            <SearchIcon className="w-5 text-foreground" />
+            <SearchIcon className="w-5 text-primary" />
           </Link>
         </motion.div>
       </nav>
@@ -90,12 +90,12 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
         >
           <Link href="/search">
             <span className="sr-only">Search</span>
-            <SearchIcon className="w-5 text-foreground" />
+            <SearchIcon className="w-5 text-primary" />
           </Link>
         </motion.div>
         <motion.button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="p-2 text-foreground"
+          className="p-2 text-primary"
           aria-label="Toggle menu"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -112,7 +112,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            className="absolute top-full left-4 right-4 mt-2 md:hidden glass backdrop-blur-2xl backdrop-saturate-150 rounded-lg"
+            className="absolute top-full left-4 right-4 mt-2 md:hidden backdrop-blur-md bg-white/95 dark:bg-black/95 shadow-lg rounded-xl border border-border"
             variants={mobileMenuVariants}
             initial="hidden"
             animate="visible"

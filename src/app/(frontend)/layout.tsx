@@ -14,7 +14,6 @@ import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import { GeistSans } from 'geist/font/sans';
-import { GeistMono } from 'geist/font/mono';
 
 import './globals.css';
 import { getServerSideURL } from '@/utilities/getURL';
@@ -24,11 +23,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const { isEnabled } = await draftMode();
 
   return (
-    <html
-      className={[GeistSans.variable, GeistMono.variable].join(' ')}
-      lang="en"
-      suppressHydrationWarning
-    >
+    <html className={GeistSans.variable} lang="en" suppressHydrationWarning>
       <head>
         <GoogleAnalytics />
         <InitTheme />

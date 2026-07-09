@@ -4,7 +4,7 @@ import type { ScholarCaseStudyBlock as ScholarCaseStudyBlockProps } from '@/payl
 import type { Media as MediaType } from '@/payload-types'
 
 import { cn } from '@/utilities/ui'
-import { Eyebrow } from '@/components/ui/eyebrow'
+import { Badge } from '@/components/ui/badge'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 
@@ -14,7 +14,7 @@ export const ScholarCaseStudyBlock: React.FC<ScholarCaseStudyBlockProps> = (prop
   const imageOnRight = imagePosition === 'right'
 
   return (
-    <div className="w-full py-16 lg:py-24">
+    <div className="w-full py-10 lg:py-20">
       <div className="container mx-auto">
         <div
           className={cn(
@@ -46,10 +46,10 @@ export const ScholarCaseStudyBlock: React.FC<ScholarCaseStudyBlockProps> = (prop
             <div className="flex flex-col gap-2">
               {badge && (
                 <div>
-                  <Eyebrow variant="award">{badge}</Eyebrow>
+                  <Badge variant="outline">{badge}</Badge>
                 </div>
               )}
-              <h4 className="font-display text-display-md md:text-display-lg">{scholarName}</h4>
+              <h4 className="text-3xl md:text-5xl tracking-tighter font-regular">{scholarName}</h4>
               {school && (
                 <p className="text-lg leading-relaxed tracking-tight text-muted-foreground">
                   {school}
