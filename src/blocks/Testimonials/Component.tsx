@@ -59,9 +59,9 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
             <CarouselContent>
               {items?.map((item, index) => (
                 <CarouselItem className="lg:basis-3/5" key={index}>
-                  <div className="bg-muted rounded-md h-full lg:col-span-2 p-6  flex justify-between flex-col">
+                  <div className="bg-accent rounded-lg h-full lg:col-span-2 p-8  flex justify-between flex-col">
                     <div className="flex flex-col gap-4">
-                      <p className="text-base leading-relaxed">{item.quote}</p>
+                      <p className="text-lg leading-relaxed">{item.quote}</p>
                       <p className="flex flex-row gap-2 text-sm items-center">
                         <span className="text-muted-foreground">By</span>
                         <Avatar className="h-6 w-6">
