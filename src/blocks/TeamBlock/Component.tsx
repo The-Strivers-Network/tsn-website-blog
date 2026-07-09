@@ -39,14 +39,14 @@ export const TeamBlock: React.FC<TeamBlockProps> = (props) => {
               <div className="grid grid-cols-2 gap-4 border-t py-6 md:grid-cols-4">
                 {group.members?.map((member, memberIndex) => (
                   <div key={memberIndex}>
-                    <div className="bg-background size-20 rounded-full border p-0.5 shadow shadow-zinc-950/5 overflow-hidden">
+                    <div className="bg-background size-20 rounded-lg border p-0.5 shadow shadow-zinc-950/5 overflow-hidden">
                       {member.avatar && typeof member.avatar === 'object' ? (
                         <Media
                           resource={member.avatar as MediaType}
-                          imgClassName="aspect-square rounded-full object-cover"
+                          imgClassName="aspect-square rounded-lg object-cover"
                         />
                       ) : (
-                        <div className="aspect-square rounded-full bg-muted flex items-center justify-center text-sm font-medium">
+                        <div className="aspect-square rounded-lg bg-muted flex items-center justify-center text-sm font-medium">
                           {member.name?.charAt(0)}
                         </div>
                       )}

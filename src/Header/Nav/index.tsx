@@ -76,7 +76,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
         >
           <Link href="/search">
             <span className="sr-only">Search</span>
-            <SearchIcon className="w-5 text-primary" />
+            <SearchIcon className="w-5 text-foreground" />
           </Link>
         </motion.div>
       </nav>
@@ -90,12 +90,12 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
         >
           <Link href="/search">
             <span className="sr-only">Search</span>
-            <SearchIcon className="w-5 text-primary" />
+            <SearchIcon className="w-5 text-foreground" />
           </Link>
         </motion.div>
         <motion.button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="p-2 text-primary"
+          className="p-2 text-foreground"
           aria-label="Toggle menu"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}

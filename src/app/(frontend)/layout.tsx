@@ -15,13 +15,6 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
-import { Funnel_Display } from 'next/font/google';
-
-const funnelDisplay = Funnel_Display({
-  subsets: ['latin'],
-  weight: '500',
-  variable: '--font-funnel',
-});
 
 import './globals.css';
 import { getServerSideURL } from '@/utilities/getURL';
@@ -32,7 +25,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html
-      className={[GeistSans.variable, GeistMono.variable, funnelDisplay.variable].join(' ')}
+      className={[GeistSans.variable, GeistMono.variable].join(' ')}
       lang="en"
       suppressHydrationWarning
     >

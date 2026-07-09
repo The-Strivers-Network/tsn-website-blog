@@ -34,9 +34,9 @@ export const StatsBlock: React.FC<StatsBlockProps> = (props) => {
             {items?.map((item, index) => (
               <div
                 key={index}
-                className="flex flex-col justify-between gap-6 rounded-lg bg-surface-lilac p-7"
+                className="flex flex-col justify-between gap-6 rounded-lg bg-surface-muted p-7"
               >
-                <h2 className="font-display text-stat-mega text-primary flex flex-row items-end gap-3">
+                <h2 className="font-display text-stat-mega text-foreground flex flex-row items-end gap-3">
                   {item.value}
                   {item.change && (
                     <span className="font-mono text-sm tracking-normal text-muted-foreground">

@@ -29,7 +29,7 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richTex
           <div>
             <Media
               className="-mx-4 md:-mx-8 2xl:-mx-16"
-              imgClassName="rounded-xl"
+              imgClassName="rounded-lg"
               priority
               resource={media}
             />

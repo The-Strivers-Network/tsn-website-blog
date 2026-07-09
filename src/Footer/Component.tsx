@@ -15,7 +15,7 @@ export async function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="mt-auto bg-ink-deep text-on-plum-muted border-t border-white/10">
+    <footer className="mt-auto bg-ink-deep text-on-inverted-muted border-t border-white/10">
       <div className="container py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Brand Section */}
@@ -23,7 +23,7 @@ export async function Footer() {
             <Link className="inline-block" href="/" aria-label="Home">
               <Logo className="transition-opacity hover:opacity-80" />
             </Link>
-            <p className="text-sm text-on-plum-muted max-w-sm">
+            <p className="text-sm text-on-inverted-muted max-w-sm">
               The Strivers&apos; Network is a community of students dedicated to helping each other succeed.
             </p>
           </div>
@@ -35,7 +35,7 @@ export async function Footer() {
                 {navItems.map(({ link }, i) => (
                   <li key={i}>
                     <CMSLink
-                      className="text-sm text-on-plum-muted hover:text-primary-bright transition-colors duration-200 inline-block"
+                      className="text-sm text-on-inverted-muted hover:text-on-inverted transition-colors duration-200 inline-block"
                       {...link}
                     />
                   </li>
@@ -55,19 +55,19 @@ export async function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-on-plum-muted">
+            <p className="text-sm text-on-inverted-muted">
               &copy; {currentYear} The Strivers&apos; Network. All rights reserved.
             </p>
             <div className="flex gap-6">
               <Link
                 href="/privacy"
-                className="text-sm text-on-plum-muted hover:text-primary-bright transition-colors duration-200"
+                className="text-sm text-on-inverted-muted hover:text-on-inverted transition-colors duration-200"
               >
                 Privacy Policy
               </Link>
               <Link
                 href="/terms"
-                className="text-sm text-on-plum-muted hover:text-primary-bright transition-colors duration-200"
+                className="text-sm text-on-inverted-muted hover:text-on-inverted transition-colors duration-200"
               >
                 Terms of Service
               </Link>

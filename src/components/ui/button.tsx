@@ -5,17 +5,17 @@ import { Slot } from "radix-ui"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "focus-visible:ring-ring focus-visible:ring-2 aria-invalid:ring-destructive/20 aria-invalid:border-destructive rounded-full border border-transparent bg-clip-padding text-[15px] font-medium leading-none focus-visible:outline-none aria-invalid:ring-1 [&_svg:not([class*='size-'])]:size-4 inline-flex items-center justify-center whitespace-nowrap transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none group/button select-none",
+  "focus-visible:ring-ring focus-visible:ring-2 aria-invalid:ring-destructive/20 aria-invalid:border-destructive rounded-lg border border-transparent bg-clip-padding text-[15px] font-medium leading-none focus-visible:outline-none aria-invalid:ring-1 [&_svg:not([class*='size-'])]:size-4 inline-flex items-center justify-center whitespace-nowrap transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none group/button select-none",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary-hover hover:shadow-card-hover",
-        outline: "border-hairline-strong bg-card text-primary hover:bg-secondary aria-expanded:bg-secondary",
-        secondary: "border-hairline-strong bg-card text-primary hover:bg-secondary aria-expanded:bg-secondary",
-        ghost: "text-primary hover:bg-accent hover:text-accent-foreground aria-expanded:bg-accent",
+        default: "bg-foreground text-background hover:bg-foreground/85 hover:shadow-card-hover",
+        outline: "border-hairline-strong bg-card text-foreground hover:bg-muted aria-expanded:bg-muted",
+        secondary: "border-hairline-strong bg-card text-foreground hover:bg-muted aria-expanded:bg-muted",
+        ghost: "text-foreground hover:bg-accent hover:text-accent-foreground aria-expanded:bg-accent",
         destructive: "bg-destructive/10 hover:bg-destructive/20 focus-visible:ring-destructive/20 text-destructive",
-        link: "text-primary underline-offset-4 hover:underline",
-        donate: "bg-accent-gold text-ink hover:shadow-card-hover hover:bg-accent-gold/90",
+        link: "text-foreground underline-offset-4 hover:underline",
+        donate: "bg-primary text-primary-foreground hover:bg-primary-hover hover:shadow-card-hover",
       },
       size: {
         default: "h-11 gap-2 px-[22px] has-data-[icon=inline-end]:pr-4 has-data-[icon=inline-start]:pl-4",

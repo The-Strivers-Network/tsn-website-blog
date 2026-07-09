@@ -31,7 +31,7 @@ export function ToTopButton() {
   return (
     <button
       onClick={clickHandler}
-      className={visible ? 'fixed bottom-8 right-8 rounded-full p-2 bg-gray-600' : 'hidden'}
+      className={visible ? 'fixed bottom-8 right-8 rounded-lg p-2 bg-gray-600' : 'hidden'}
     >
       <ArrowUpIcon />
     </button>

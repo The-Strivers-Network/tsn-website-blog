@@ -18,64 +18,61 @@
   }
 
   :root {
-    /* spec: canvas #FBFAFF / ink #1E1B2E */
-    --background: 252 100% 99%;
-    --foreground: 249 26% 14%;
+    /* spec: canvas #FAFAFA / ink #18181B — strictly monochrome */
+    --background: 0 0% 98%;
+    --foreground: 240 6% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 249 26% 14%;
+    --card-foreground: 240 6% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 249 26% 14%;
+    --popover-foreground: 240 6% 10%;
 
-    /* Striver Purple #6D28D9 */
+    /* Striver Purple #6D28D9 — the single sparing accent (donate, links, focus) */
     --primary: 263 70% 50%;
     --primary-foreground: 0 0% 100%;
     --primary-hover: 263 69% 42%;
 
-    /* surface-lilac #F3F0FA / primary-active #4C1D95 */
-    --secondary: 258 50% 96%;
-    --secondary-foreground: 264 67% 35%;
+    /* neutral #F4F4F5 / ink */
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 6% 10%;
 
-    /* hairline-soft #F0EDF7 / muted #6E6A7C */
-    --muted: 258 38% 95%;
-    --muted-foreground: 253 8% 42%;
+    /* neutral #F4F4F5 / muted gray */
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 43%;
 
-    /* primary-soft #EDE9FE / primary-active */
-    --accent: 251 91% 95%;
-    --accent-foreground: 264 67% 35%;
+    /* neutral #F4F4F5 / ink */
+    --accent: 240 5% 96%;
+    --accent-foreground: 240 6% 10%;
 
     --destructive: 0 61% 54%;
     --destructive-foreground: 0 0% 100%;
 
-    /* hairline #E8E4F0 / hairline-strong #D8D2E6 */
-    --border: 260 29% 92%;
-    --input: 258 29% 86%;
+    /* hairline #E4E4E7 / hairline-strong #D4D4D8 */
+    --border: 240 6% 90%;
+    --input: 240 5% 84%;
     --ring: 263 70% 50% / 0.35;
 
-    --radius: 1rem;
+    --radius: 0.5rem;
 
     --success: 152 54% 40%;
     --warning: 41 74% 53%;
     --error: 0 61% 54%;
 
     /* ---- TSN extension tokens (theme-flipping) ---- */
-    --surface-lilac: 258 50% 96%;
-    --accent-gold: 41 74% 53%;
-    --accent-gold-soft: 42 82% 91%;
-    --accent-gold-foreground: 41 79% 30%;
-    --hairline: 260 29% 92%;
-    --hairline-soft: 258 38% 95%;
-    --hairline-strong: 258 29% 86%;
+    --surface-muted: 240 5% 96%;
+    --hairline: 240 6% 90%;
+    --hairline-soft: 240 5% 96%;
+    --hairline-strong: 240 5% 84%;
     --glass-fill: 0 0% 100% / 0.55;
     --glass-border: 0 0% 100% / 0.6;
 
     /* ---- static (theme-stable) ---- */
-    --surface-plum: 256 42% 20%;
-    --ink: 249 26% 14%;
-    --ink-deep: 254 27% 10%;
-    --on-plum: 251 91% 95%;
-    --on-plum-muted: 257 34% 76%;
+    --surface-inverted: 240 6% 13%;
+    --ink: 240 6% 10%;
+    --ink-deep: 240 10% 4%;
+    --on-inverted: 0 0% 98%;
+    --on-inverted-muted: 240 5% 65%;
     --primary-bright: 258 90% 66%;
 
     --chart-1: oklch(0.811 0.111 293.571);
@@ -94,53 +91,50 @@
   }
 
   [data-theme='dark'] {
-    /* ink-deep floor / on-plum text */
-    --background: 254 27% 10%;
-    --foreground: 251 91% 95%;
+    /* ink-deep floor #09090B / near-white text */
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
 
-    /* elevated plum #201A33 */
-    --card: 254 32% 15%;
-    --card-foreground: 251 91% 95%;
+    /* elevated neutral #1F1F23 */
+    --card: 240 6% 13%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 254 32% 15%;
-    --popover-foreground: 251 91% 95%;
+    --popover: 240 6% 13%;
+    --popover-foreground: 0 0% 98%;
 
-    /* violet-400 #A78BFA — contrast-driven (see Global Constraints) */
+    /* violet-400 #A78BFA — contrast-driven accent on dark */
     --primary: 255 92% 76%;
-    --primary-foreground: 254 27% 10%;
+    --primary-foreground: 240 10% 4%;
     --primary-hover: 256 87% 85%;
 
-    /* surface-plum / on-plum */
-    --secondary: 256 42% 20%;
-    --secondary-foreground: 251 91% 95%;
+    /* neutral #27272A / near-white */
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 98%;
 
-    /* plum panel #241D3A / on-plum-muted #B7ABD6 */
-    --muted: 254 33% 17%;
-    --muted-foreground: 257 34% 76%;
+    /* neutral panel #27272A / muted gray #A1A1AA */
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 65%;
 
-    /* lifted plum #3A2C5E */
-    --accent: 257 36% 27%;
-    --accent-foreground: 251 91% 95%;
+    /* lifted neutral #27272A */
+    --accent: 240 4% 16%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 61% 54%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 257 34% 76% / 0.16;
-    --input: 257 34% 76% / 0.24;
+    --border: 0 0% 100% / 0.1;
+    --input: 0 0% 100% / 0.15;
     --ring: 255 92% 76% / 0.4;
 
     --success: 152 54% 40%;
     --warning: 41 74% 53%;
     --error: 0 61% 54%;
 
-    --surface-lilac: 254 33% 17%;
-    --accent-gold: 41 74% 53%;
-    --accent-gold-soft: 41 74% 53% / 0.15;
-    --accent-gold-foreground: 42 61% 69%;
-    --hairline: 257 34% 76% / 0.16;
-    --hairline-soft: 257 34% 76% / 0.1;
-    --hairline-strong: 257 34% 76% / 0.24;
-    --glass-fill: 256 42% 20% / 0.55;
+    --surface-muted: 240 4% 16%;
+    --hairline: 0 0% 100% / 0.1;
+    --hairline-soft: 0 0% 100% / 0.06;
+    --hairline-strong: 0 0% 100% / 0.16;
+    --glass-fill: 240 6% 13% / 0.55;
     --glass-border: 0 0% 100% / 0.12;
   }
   .theme {
@@ -173,19 +167,19 @@
 }
 
 @layer components {
-  /* Frosted glass — spotlight surfaces only (nav-on-scroll, hero glow card, mobile sheet). */
+  /* Frosted glass — spotlight surfaces only (nav-on-scroll, hero overlays, mobile sheet). Strictly neutral. */
   .glass {
     background-color: hsl(var(--glass-fill));
     border: 1px solid hsl(var(--glass-border));
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.45),
-      0 8px 32px rgba(30, 27, 46, 0.12);
+      0 8px 32px rgba(24, 24, 27, 0.12);
     backdrop-filter: blur(16px) saturate(130%);
   }
 
-  /* Static plum frost for use over plum bands (both themes). */
-  .glass-plum {
-    background-color: hsla(256, 42%, 20%, 0.72);
+  /* Static dark frost for use over inverted bands (both themes). */
+  .glass-inverted {
+    background-color: hsla(240, 6%, 13%, 0.72);
     border: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.08),
@@ -197,8 +191,8 @@
     .glass {
       background-color: hsl(var(--card));
     }
-    .glass-plum {
-      background-color: hsl(var(--surface-plum));
+    .glass-inverted {
+      background-color: hsl(var(--surface-inverted));
     }
   }
 
@@ -207,8 +201,8 @@
       background-color: hsl(var(--card));
       backdrop-filter: none;
     }
-    .glass-plum {
-      background-color: hsl(var(--surface-plum));
+    .glass-inverted {
+      background-color: hsl(var(--surface-inverted));
       backdrop-filter: none;
     }
   }

@@ -51,28 +51,24 @@ const config = {
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
       borderRadius: {
-        xl: 'calc(var(--radius) + 8px)',
+        /* spec caps every radius at 8px (--radius: 0.5rem); xl/lg/md all resolve to the ceiling */
+        xl: 'var(--radius)',
         lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 4px)',
-        sm: 'calc(var(--radius) - 8px)',
+        md: 'var(--radius)',
+        sm: 'calc(var(--radius) - 4px)',
       },
       boxShadow: {
-        card: '0 1px 2px rgba(30,27,46,0.04), 0 8px 24px rgba(30,27,46,0.06)',
-        'card-hover': '0 2px 4px rgba(30,27,46,0.06), 0 16px 40px rgba(109,40,217,0.12)',
-        glass: 'inset 0 1px 0 rgba(255,255,255,0.45), 0 8px 32px rgba(30,27,46,0.12)',
-        'glass-plum': 'inset 0 1px 0 rgba(255,255,255,0.08), 0 12px 40px rgba(0,0,0,0.35)',
-        'glass-glow-hover': 'inset 0 1px 0 rgba(255,255,255,0.50), 0 16px 48px rgba(109,40,217,0.20)',
+        card: '0 1px 2px rgba(24,24,27,0.04), 0 8px 24px rgba(24,24,27,0.06)',
+        'card-hover': '0 2px 4px rgba(24,24,27,0.08), 0 16px 40px rgba(24,24,27,0.14)',
+        glass: 'inset 0 1px 0 rgba(255,255,255,0.45), 0 8px 32px rgba(24,24,27,0.12)',
+        'glass-inverted': 'inset 0 1px 0 rgba(255,255,255,0.08), 0 12px 40px rgba(0,0,0,0.35)',
+        'glass-hover': 'inset 0 1px 0 rgba(255,255,255,0.50), 0 16px 48px rgba(24,24,27,0.16)',
         'focus-ring': '0 0 0 3px rgba(109,40,217,0.35)',
       },
       colors: {
         accent: {
           DEFAULT: 'hsl(var(--accent) / <alpha-value>)',
           foreground: 'hsl(var(--accent-foreground) / <alpha-value>)',
-        },
-        'accent-gold': {
-          DEFAULT: 'hsl(var(--accent-gold) / <alpha-value>)',
-          soft: 'hsl(var(--accent-gold-soft))',
-          foreground: 'hsl(var(--accent-gold-foreground) / <alpha-value>)',
         },
         background: 'hsl(var(--background) / <alpha-value>)',
         border: 'hsl(var(--border))',
@@ -97,9 +93,9 @@ const config = {
           DEFAULT: 'hsl(var(--muted) / <alpha-value>)',
           foreground: 'hsl(var(--muted-foreground) / <alpha-value>)',
         },
-        'on-plum': {
-          DEFAULT: 'hsl(var(--on-plum) / <alpha-value>)',
-          muted: 'hsl(var(--on-plum-muted) / <alpha-value>)',
+        'on-inverted': {
+          DEFAULT: 'hsl(var(--on-inverted) / <alpha-value>)',
+          muted: 'hsl(var(--on-inverted-muted) / <alpha-value>)',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover) / <alpha-value>)',
@@ -119,20 +115,20 @@ const config = {
         success: 'hsl(var(--success) / <alpha-value>)',
         error: 'hsl(var(--error) / <alpha-value>)',
         warning: 'hsl(var(--warning) / <alpha-value>)',
-        'surface-plum': 'hsl(var(--surface-plum) / <alpha-value>)',
-        'surface-lilac': 'hsl(var(--surface-lilac) / <alpha-value>)',
+        'surface-inverted': 'hsl(var(--surface-inverted) / <alpha-value>)',
+        'surface-muted': 'hsl(var(--surface-muted) / <alpha-value>)',
       },
       fontFamily: {
-        display: ['var(--font-funnel)', 'var(--font-geist-sans)', 'sans-serif'],
+        display: ['var(--font-geist-sans)', 'sans-serif'],
         mono: ['var(--font-geist-mono)', 'ui-monospace', 'SF Mono', 'Consolas', 'monospace'],
         sans: ['var(--font-geist-sans)', 'sans-serif'],
         title: ['var(--font-geist-sans)', 'sans-serif'],
       },
       fontSize: {
-        'display-mega': ['4.25rem', { lineHeight: '1.05', letterSpacing: '-1.7px', fontWeight: '500' }],
-        'display-lg': ['2.75rem', { lineHeight: '1.1', letterSpacing: '-1.1px', fontWeight: '500' }],
-        'display-md': ['2rem', { lineHeight: '1.15', letterSpacing: '-0.6px', fontWeight: '500' }],
-        'stat-mega': ['3.5rem', { lineHeight: '1', letterSpacing: '-1.4px', fontWeight: '500' }],
+        'display-mega': ['4.25rem', { lineHeight: '1.05', letterSpacing: '-1.5px', fontWeight: '600' }],
+        'display-lg': ['2.75rem', { lineHeight: '1.1', letterSpacing: '-1px', fontWeight: '600' }],
+        'display-md': ['2rem', { lineHeight: '1.15', letterSpacing: '-0.5px', fontWeight: '600' }],
+        'stat-mega': ['3.5rem', { lineHeight: '1', letterSpacing: '-1.2px', fontWeight: '600' }],
         eyebrow: ['0.75rem', { lineHeight: '1.4', letterSpacing: '1.2px', fontWeight: '500' }],
       },
       keyframes: {

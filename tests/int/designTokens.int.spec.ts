@@ -59,11 +59,10 @@ const lightPairs: Pair[] = [
   ['muted-foreground', 'background', 4.5],
   ['primary-foreground', 'primary', 4.5],
   ['secondary-foreground', 'secondary', 4.5],
-  ['accent-gold-foreground', 'accent-gold-soft', 4.5],
-  ['primary', 'background', 3.0], // stat numbers (large text)
+  ['primary', 'background', 4.5], // purple inline links on canvas
   ['card-foreground', 'card', 4.5],
   ['muted-foreground', 'accent', 4.5],
-  ['muted-foreground', 'surface-lilac', 4.5],
+  ['muted-foreground', 'surface-muted', 4.5],
 ]
 
 const darkPairs: Pair[] = [
@@ -72,12 +71,13 @@ const darkPairs: Pair[] = [
   ['primary-foreground', 'primary', 4.5],
   ['primary', 'background', 4.5], // purple link text on dark floor
   ['secondary-foreground', 'secondary', 4.5],
-  ['accent-gold', 'background', 3.0], // gold hero stat (large text)
   ['card-foreground', 'card', 4.5],
+  ['muted-foreground', 'accent', 4.5],
+  ['muted-foreground', 'surface-muted', 4.5],
 ]
 
-// Static (theme-stable) plum band text
-const staticPairs: Pair[] = [['on-plum-muted', 'surface-plum', 4.5]]
+// Static (theme-stable) inverted band text
+const staticPairs: Pair[] = [['on-inverted-muted', 'surface-inverted', 4.5]]
 
 describe('design tokens meet WCAG contrast', () => {
   it.each(lightPairs)('light: %s on %s >= %d', (fg, bg, min) => {

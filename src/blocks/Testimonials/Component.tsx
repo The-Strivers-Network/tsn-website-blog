@@ -68,7 +68,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
                           {item.authorAvatar && typeof item.authorAvatar === 'object' ? (
                             <Media
                               resource={item.authorAvatar as MediaType}
-                              imgClassName="aspect-square rounded-full object-cover h-6 w-6"
+                              imgClassName="aspect-square rounded-lg object-cover h-6 w-6"
                             />
                           ) : (
                             <AvatarFallback>
