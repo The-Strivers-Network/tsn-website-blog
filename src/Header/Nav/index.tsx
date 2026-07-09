@@ -112,7 +112,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            className="absolute top-full left-4 right-4 mt-2 md:hidden backdrop-blur-md bg-white/95 dark:bg-black/95 shadow-lg rounded-xl border border-border"
+            className="absolute top-full left-4 right-4 mt-2 md:hidden glass backdrop-blur-2xl backdrop-saturate-150 rounded-lg"
             variants={mobileMenuVariants}
             initial="hidden"
             animate="visible"

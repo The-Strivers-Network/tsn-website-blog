@@ -52,9 +52,9 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     >
       <motion.div
         className={`
-          container rounded-md
+          container rounded-full
           transition-all duration-300 ease-in-out
-          ${scrolled ? 'backdrop-blur-md bg-white/80 dark:bg-neutral-900/80 shadow-lg border border-border/1' : 'bg-transparent'}
+          ${scrolled ? 'glass backdrop-blur-xl backdrop-saturate-150 rounded-full' : 'bg-transparent border border-transparent'}
         `}
         style={{
           scale: headerScale,

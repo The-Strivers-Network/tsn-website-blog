@@ -15,15 +15,15 @@ export async function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="mt-auto backdrop-blur-md bg-white/80 dark:bg-neutral-900/80 shadow-lg border-t border-border">
+    <footer className="mt-auto bg-ink-deep text-on-plum-muted border-t border-white/10">
       <div className="container py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Brand Section */}
           <div className="lg:col-span-4 space-y-4">
             <Link className="inline-block" href="/" aria-label="Home">
-              <Logo className="invert dark:invert-0 transition-opacity hover:opacity-80" />
+              <Logo className="transition-opacity hover:opacity-80" />
             </Link>
-            <p className="text-sm text-muted-foreground max-w-sm">
+            <p className="text-sm text-on-plum-muted max-w-sm">
               The Strivers&apos; Network is a community of students dedicated to helping each other succeed.
             </p>
           </div>
@@ -35,7 +35,7 @@ export async function Footer() {
                 {navItems.map(({ link }, i) => (
                   <li key={i}>
                     <CMSLink
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 inline-block"
+                      className="text-sm text-on-plum-muted hover:text-primary-bright transition-colors duration-200 inline-block"
                       {...link}
                     />
                   </li>
@@ -53,21 +53,21 @@ export async function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-border">
+        <div className="mt-12 pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-on-plum-muted">
               &copy; {currentYear} The Strivers&apos; Network. All rights reserved.
             </p>
             <div className="flex gap-6">
               <Link
                 href="/privacy"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                className="text-sm text-on-plum-muted hover:text-primary-bright transition-colors duration-200"
               >
                 Privacy Policy
               </Link>
               <Link
                 href="/terms"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                className="text-sm text-on-plum-muted hover:text-primary-bright transition-colors duration-200"
               >
                 Terms of Service
               </Link>
