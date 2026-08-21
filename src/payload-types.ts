@@ -73,6 +73,8 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    universities: University;
+    scholars: Scholar;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -96,6 +98,8 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    universities: UniversitiesSelect<false> | UniversitiesSelect<true>;
+    scholars: ScholarsSelect<false> | ScholarsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -210,18 +214,26 @@ export interface Page {
     enablePixelTrail?: boolean | null;
   };
   layout: (
-    | CallToActionBlock
-    | ContentBlock
-    | MediaBlock
+    | AdmissionsMapBlock
     | ArchiveBlock
-    | FormBlock
     | BentoBlock
+    | CallToActionBlock
+    | CaseStudiesBlock
+    | ContactInfoBlock
+    | ContentBlock
     | FAQBlock
+    | FeatureSplitBlock
+    | FormBlock
+    | GiveBackCycleBlock
+    | MediaBlock
     | ParagraphBlock
+    | PipelineStepsBlock
+    | ScholarDirectoryBlock
     | ScrollItemsBlock
     | StatsBlock
     | TeamBlock
     | TestimonialsBlock
+    | VerificationBlock
   )[];
   meta?: {
     title?: string | null;
@@ -518,9 +530,89 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AdmissionsMapBlock".
+ */
+export interface AdmissionsMapBlock {
+  /**
+   * Optional badge label shown above the heading
+   */
+  badge?: string | null;
+  heading?: string | null;
+  description?: string | null;
+  scope?: ('world' | 'srilanka' | 'both') | null;
+  /**
+   * List every university beneath the map
+   */
+  showUniversityList?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'admissionsMap';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArchiveBlock".
+ */
+export interface ArchiveBlock {
+  introContent?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  populateBy?: ('collection' | 'selection') | null;
+  relationTo?: 'posts' | null;
+  categories?: (number | Category)[] | null;
+  limit?: number | null;
+  selectedDocs?:
+    | {
+        relationTo: 'posts';
+        value: number | Post;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'archive';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BentoBlock".
+ */
+export interface BentoBlock {
+  /**
+   * Optional badge label shown above the heading
+   */
+  badge?: string | null;
+  heading: string;
+  description?: string | null;
+  items: {
+    heading: string;
+    description?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'bento';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "CallToActionBlock".
  */
 export interface CallToActionBlock {
+  /**
+   * Row keeps the inline layout. Centered card is the large standalone panel.
+   */
+  variant?: ('row' | 'centeredCard') | null;
+  badge?: string | null;
+  heading?: string | null;
   richText?: {
     root: {
       type: string;
@@ -563,6 +655,125 @@ export interface CallToActionBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'cta';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CaseStudiesBlock".
+ */
+export interface CaseStudiesBlock {
+  /**
+   * Optional badge label shown above the heading
+   */
+  badge?: string | null;
+  heading?: string | null;
+  description?: string | null;
+  /**
+   * Scholars without a case study are skipped either way
+   */
+  source?: ('featured' | 'selected') | null;
+  /**
+   * Rendered in the order listed here
+   */
+  scholars?: (number | Scholar)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'caseStudies';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "scholars".
+ */
+export interface Scholar {
+  id: number;
+  name: string;
+  /**
+   * Scholars’ Pipeline cohort
+   */
+  cohort: 'SP1' | 'SP2' | 'SP3' | 'SP4' | 'SP5';
+  /**
+   * Sri Lankan school attended before admission
+   */
+  school: string;
+  district: 'Colombo' | 'Kalutara' | 'Kandy' | 'Galle' | 'Gampaha' | 'Ampara';
+  university: number | University;
+  major?: string | null;
+  /**
+   * Additional admits, scholarships, or honours
+   */
+  notableMentions?:
+    | {
+        mention: string;
+        id?: string | null;
+      }[]
+    | null;
+  headshot?: (number | null) | Media;
+  /**
+   * Long-form case study. Only set for featured scholars.
+   */
+  caseStudy?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Closing quote shown at the end of the case study
+   */
+  pullQuote?: string | null;
+  /**
+   * Show this scholar as a case study on the Scholars page
+   */
+  featured?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "universities".
+ */
+export interface University {
+  id: number;
+  /**
+   * Canonical name as it should appear on the site
+   */
+  name: string;
+  country: string;
+  city?: string | null;
+  /**
+   * Latitude used to place the pin on the admissions map
+   */
+  lat: number;
+  /**
+   * Longitude used to place the pin on the admissions map
+   */
+  lng: number;
+  logo?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactInfoBlock".
+ */
+export interface ContactInfoBlock {
+  /**
+   * Optional badge label shown above the heading
+   */
+  badge?: string | null;
+  heading?: string | null;
+  description?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contactBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -616,20 +827,43 @@ export interface ContentBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MediaBlock".
+ * via the `definition` "FAQBlock".
  */
-export interface MediaBlock {
-  media: number | Media;
+export interface FAQBlock {
+  /**
+   * Optional badge label shown above the heading
+   */
+  badge?: string | null;
+  heading: string;
+  description?: string | null;
+  /**
+   * Label for the contact/CTA button
+   */
+  ctaLabel?: string | null;
+  items: {
+    question: string;
+    answer: string;
+    id?: string | null;
+  }[];
   id?: string | null;
   blockName?: string | null;
-  blockType: 'mediaBlock';
+  blockType: 'faqBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ArchiveBlock".
+ * via the `definition` "FeatureSplitBlock".
  */
-export interface ArchiveBlock {
-  introContent?: {
+export interface FeatureSplitBlock {
+  /**
+   * Optional badge label shown above the heading
+   */
+  badge?: string | null;
+  heading?: string | null;
+  /**
+   * Short lead paragraph directly under the heading
+   */
+  lead?: string | null;
+  body?: {
     root: {
       type: string;
       children: {
@@ -644,19 +878,44 @@ export interface ArchiveBlock {
     };
     [k: string]: unknown;
   } | null;
-  populateBy?: ('collection' | 'selection') | null;
-  relationTo?: 'posts' | null;
-  categories?: (number | Category)[] | null;
-  limit?: number | null;
-  selectedDocs?:
+  /**
+   * Show a call to action under the copy
+   */
+  enableLink?: boolean | null;
+  link?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+  };
+  /**
+   * Visual shown beside the copy
+   */
+  media?: (number | null) | Media;
+  /**
+   * Icon row shown beneath the split
+   */
+  features?:
     | {
-        relationTo: 'posts';
-        value: number | Post;
+        icon?:
+          ('compass' | 'users' | 'graduation-cap' | 'handshake' | 'target' | 'sparkles' | 'book-open' | 'globe') | null;
+        title: string;
+        description?: string | null;
+        id?: string | null;
       }[]
     | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'archive';
+  blockType: 'featureSplit';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -801,9 +1060,6 @@ export interface Form {
       )[]
     | null;
   submitButtonLabel?: string | null;
-  /**
-   * Choose whether to display an on-page message or redirect to a different page after they submit the form.
-   */
   confirmationType?: ('message' | 'redirect') | null;
   confirmationMessage?: {
     root: {
@@ -823,9 +1079,6 @@ export interface Form {
   redirect?: {
     url: string;
   };
-  /**
-   * Send custom emails when the form submits. Use comma separated lists to send the same email to multiple recipients. To reference a value from this form, wrap that field's name with double curly brackets, i.e. {{firstName}}. You can use a wildcard {{*}} to output all data and {{*:table}} to format it as an HTML table in the email.
-   */
   emails?:
     | {
         emailTo?: string | null;
@@ -834,9 +1087,6 @@ export interface Form {
         replyTo?: string | null;
         emailFrom?: string | null;
         subject: string;
-        /**
-         * Enter the message that should be sent in this email.
-         */
         message?: {
           root: {
             type: string;
@@ -860,47 +1110,36 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "BentoBlock".
+ * via the `definition` "GiveBackCycleBlock".
  */
-export interface BentoBlock {
+export interface GiveBackCycleBlock {
   /**
    * Optional badge label shown above the heading
    */
   badge?: string | null;
-  heading: string;
+  heading?: string | null;
   description?: string | null;
-  items: {
-    heading: string;
+  /**
+   * Stages of the give-back loop, in order. The last stage returns to the first.
+   */
+  stages: {
+    title: string;
     description?: string | null;
     id?: string | null;
   }[];
   id?: string | null;
   blockName?: string | null;
-  blockType: 'bento';
+  blockType: 'giveBackCycle';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "FAQBlock".
+ * via the `definition` "MediaBlock".
  */
-export interface FAQBlock {
-  /**
-   * Optional badge label shown above the heading
-   */
-  badge?: string | null;
-  heading: string;
-  description?: string | null;
-  /**
-   * Label for the contact/CTA button
-   */
-  ctaLabel?: string | null;
-  items: {
-    question: string;
-    answer: string;
-    id?: string | null;
-  }[];
+export interface MediaBlock {
+  media: number | Media;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'faqBlock';
+  blockType: 'mediaBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -914,6 +1153,69 @@ export interface ParagraphBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'paragraph';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PipelineStepsBlock".
+ */
+export interface PipelineStepsBlock {
+  /**
+   * Optional badge label shown above the heading
+   */
+  badge?: string | null;
+  heading?: string | null;
+  description?: string | null;
+  /**
+   * Controls the application status panel below the process steps.
+   */
+  applicationStatus: 'open' | 'closed';
+  /**
+   * Live application form URL.
+   */
+  applicationUrl?: string | null;
+  /**
+   * Message shown while applications are closed. The action links to Contact.
+   */
+  closedMessage?: string | null;
+  steps: {
+    /**
+     * e.g. STEP 01. Falls back to the step number when empty.
+     */
+    stepLabel?: string | null;
+    title: string;
+    description?: string | null;
+    /**
+     * Optional checklist shown beneath the step description
+     */
+    details?:
+      | {
+          detail: string;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'pipelineSteps';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ScholarDirectoryBlock".
+ */
+export interface ScholarDirectoryBlock {
+  /**
+   * Optional badge label shown above the heading
+   */
+  badge?: string | null;
+  heading?: string | null;
+  /**
+   * Scholars come from the Scholars collection and are grouped by cohort
+   */
+  description?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'scholarDirectory';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -985,6 +1287,10 @@ export interface TeamBlock {
     members: {
       name: string;
       role?: string | null;
+      /**
+       * Optional short quote shown beneath the role
+       */
+      quote?: string | null;
       avatar?: (number | null) | Media;
       id?: string | null;
     }[];
@@ -1014,6 +1320,48 @@ export interface TestimonialsBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'testimonials';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VerificationBlock".
+ */
+export interface VerificationBlock {
+  /**
+   * Optional badge label shown above the heading
+   */
+  badge?: string | null;
+  heading?: string | null;
+  statement?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Company registration number — leave empty until confirmed
+   */
+  registrationNumber?: string | null;
+  /**
+   * e.g. 6 December 2022
+   */
+  registeredDate?: string | null;
+  /**
+   * Destination for the verification QR code
+   */
+  verifyUrl?: string | null;
+  qrImage?: (number | null) | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'verification';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1235,6 +1583,14 @@ export interface PayloadLockedDocument {
         value: number | User;
       } | null)
     | ({
+        relationTo: 'universities';
+        value: number | University;
+      } | null)
+    | ({
+        relationTo: 'scholars';
+        value: number | Scholar;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: number | Redirect;
       } | null)
@@ -1328,18 +1684,26 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
-        cta?: T | CallToActionBlockSelect<T>;
-        content?: T | ContentBlockSelect<T>;
-        mediaBlock?: T | MediaBlockSelect<T>;
+        admissionsMap?: T | AdmissionsMapBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
-        formBlock?: T | FormBlockSelect<T>;
         bento?: T | BentoBlockSelect<T>;
+        cta?: T | CallToActionBlockSelect<T>;
+        caseStudies?: T | CaseStudiesBlockSelect<T>;
+        contactBlock?: T | ContactInfoBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
         faqBlock?: T | FAQBlockSelect<T>;
+        featureSplit?: T | FeatureSplitBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+        giveBackCycle?: T | GiveBackCycleBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
         paragraph?: T | ParagraphBlockSelect<T>;
+        pipelineSteps?: T | PipelineStepsBlockSelect<T>;
+        scholarDirectory?: T | ScholarDirectoryBlockSelect<T>;
         scrollItems?: T | ScrollItemsBlockSelect<T>;
         statsBlock?: T | StatsBlockSelect<T>;
         teamBlock?: T | TeamBlockSelect<T>;
         testimonials?: T | TestimonialsBlockSelect<T>;
+        verification?: T | VerificationBlockSelect<T>;
       };
   meta?:
     | T
@@ -1358,9 +1722,57 @@ export interface PagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AdmissionsMapBlock_select".
+ */
+export interface AdmissionsMapBlockSelect<T extends boolean = true> {
+  badge?: T;
+  heading?: T;
+  description?: T;
+  scope?: T;
+  showUniversityList?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArchiveBlock_select".
+ */
+export interface ArchiveBlockSelect<T extends boolean = true> {
+  introContent?: T;
+  populateBy?: T;
+  relationTo?: T;
+  categories?: T;
+  limit?: T;
+  selectedDocs?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BentoBlock_select".
+ */
+export interface BentoBlockSelect<T extends boolean = true> {
+  badge?: T;
+  heading?: T;
+  description?: T;
+  items?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "CallToActionBlock_select".
  */
 export interface CallToActionBlockSelect<T extends boolean = true> {
+  variant?: T;
+  badge?: T;
+  heading?: T;
   richText?: T;
   links?:
     | T
@@ -1377,6 +1789,30 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CaseStudiesBlock_select".
+ */
+export interface CaseStudiesBlockSelect<T extends boolean = true> {
+  badge?: T;
+  heading?: T;
+  description?: T;
+  source?: T;
+  scholars?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactInfoBlock_select".
+ */
+export interface ContactInfoBlockSelect<T extends boolean = true> {
+  badge?: T;
+  heading?: T;
+  description?: T;
   id?: T;
   blockName?: T;
 }
@@ -1408,58 +1844,6 @@ export interface ContentBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MediaBlock_select".
- */
-export interface MediaBlockSelect<T extends boolean = true> {
-  media?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ArchiveBlock_select".
- */
-export interface ArchiveBlockSelect<T extends boolean = true> {
-  introContent?: T;
-  populateBy?: T;
-  relationTo?: T;
-  categories?: T;
-  limit?: T;
-  selectedDocs?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "FormBlock_select".
- */
-export interface FormBlockSelect<T extends boolean = true> {
-  form?: T;
-  enableIntro?: T;
-  introContent?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "BentoBlock_select".
- */
-export interface BentoBlockSelect<T extends boolean = true> {
-  badge?: T;
-  heading?: T;
-  description?: T;
-  items?:
-    | T
-    | {
-        heading?: T;
-        description?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "FAQBlock_select".
  */
 export interface FAQBlockSelect<T extends boolean = true> {
@@ -1479,10 +1863,118 @@ export interface FAQBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureSplitBlock_select".
+ */
+export interface FeatureSplitBlockSelect<T extends boolean = true> {
+  badge?: T;
+  heading?: T;
+  lead?: T;
+  body?: T;
+  enableLink?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+      };
+  media?: T;
+  features?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FormBlock_select".
+ */
+export interface FormBlockSelect<T extends boolean = true> {
+  form?: T;
+  enableIntro?: T;
+  introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GiveBackCycleBlock_select".
+ */
+export interface GiveBackCycleBlockSelect<T extends boolean = true> {
+  badge?: T;
+  heading?: T;
+  description?: T;
+  stages?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlock_select".
+ */
+export interface MediaBlockSelect<T extends boolean = true> {
+  media?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ParagraphBlock_select".
  */
 export interface ParagraphBlockSelect<T extends boolean = true> {
   text?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PipelineStepsBlock_select".
+ */
+export interface PipelineStepsBlockSelect<T extends boolean = true> {
+  badge?: T;
+  heading?: T;
+  description?: T;
+  applicationStatus?: T;
+  applicationUrl?: T;
+  closedMessage?: T;
+  steps?:
+    | T
+    | {
+        stepLabel?: T;
+        title?: T;
+        description?: T;
+        details?:
+          | T
+          | {
+              detail?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ScholarDirectoryBlock_select".
+ */
+export interface ScholarDirectoryBlockSelect<T extends boolean = true> {
+  badge?: T;
+  heading?: T;
+  description?: T;
   id?: T;
   blockName?: T;
 }
@@ -1541,6 +2033,7 @@ export interface TeamBlockSelect<T extends boolean = true> {
           | {
               name?: T;
               role?: T;
+              quote?: T;
               avatar?: T;
               id?: T;
             };
@@ -1565,6 +2058,21 @@ export interface TestimonialsBlockSelect<T extends boolean = true> {
         authorAvatar?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VerificationBlock_select".
+ */
+export interface VerificationBlockSelect<T extends boolean = true> {
+  badge?: T;
+  heading?: T;
+  statement?: T;
+  registrationNumber?: T;
+  registeredDate?: T;
+  verifyUrl?: T;
+  qrImage?: T;
   id?: T;
   blockName?: T;
 }
@@ -1760,6 +2268,44 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "universities_select".
+ */
+export interface UniversitiesSelect<T extends boolean = true> {
+  name?: T;
+  country?: T;
+  city?: T;
+  lat?: T;
+  lng?: T;
+  logo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "scholars_select".
+ */
+export interface ScholarsSelect<T extends boolean = true> {
+  name?: T;
+  cohort?: T;
+  school?: T;
+  district?: T;
+  university?: T;
+  major?: T;
+  notableMentions?:
+    | T
+    | {
+        mention?: T;
+        id?: T;
+      };
+  headshot?: T;
+  caseStudy?: T;
+  pullQuote?: T;
+  featured?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2104,6 +2650,21 @@ export interface Setting {
   lightModeLogo?: (number | null) | Media;
   darkModeIcon?: (number | null) | Media;
   darkModeLogo?: (number | null) | Media;
+  /**
+   * Public contact address shown on the contact page and footer
+   */
+  email?: string | null;
+  /**
+   * Full URL to the Linktree profile
+   */
+  linktree?: string | null;
+  socials?:
+    | {
+        platform: 'Instagram' | 'LinkedIn' | 'Facebook' | 'X' | 'YouTube' | 'TikTok';
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2162,6 +2723,15 @@ export interface SettingsSelect<T extends boolean = true> {
   lightModeLogo?: T;
   darkModeIcon?: T;
   darkModeLogo?: T;
+  email?: T;
+  linktree?: T;
+  socials?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

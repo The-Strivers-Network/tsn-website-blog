@@ -1,60 +1,66 @@
-import React from 'react'
-import { MoveDownLeft, MoveUpRight } from 'lucide-react'
+import React from "react";
+import { MoveDownLeft, MoveUpRight } from "lucide-react";
 
-import type { StatsBlock as StatsBlockProps } from '@/payload-types'
+import type { StatsBlock as StatsBlockProps } from "@/payload-types";
 
-import { Badge } from '@/components/ui/badge'
+import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 
 export const StatsBlock: React.FC<StatsBlockProps> = (props) => {
-  const { badge, heading, description, items } = props
+  const { badge, heading, description, items } = props;
 
   return (
-    <div className="w-full py-10 lg:py-20">
+    <div className="w-full py-20 lg:py-28">
       <div className="container mx-auto">
-        <div className="flex flex-col gap-10">
-          <div className="flex gap-4 flex-col">
+        <div className="flex flex-col gap-16">
+          <Reveal className="flex flex-col gap-5">
             {badge && (
-              <div>
-                <Badge variant="outline">{badge}</Badge>
-              </div>
+              <span className="font-mono text-[11px] font-medium text-muted-foreground">
+                {badge}
+              </span>
             )}
-            <div className="flex gap-2 flex-col">
-              {heading && (
-                <h4 className="text-3xl md:text-5xl tracking-tighter max-w-xl text-left font-regular">
-                  {heading}
-                </h4>
-              )}
-              {description && (
-                <p className="text-lg max-w-xl lg:max-w-lg leading-relaxed tracking-tight text-muted-foreground text-left">
-                  {description}
-                </p>
-              )}
-            </div>
-          </div>
-        <div className="grid text-left grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 w-full gap-4 lg:gap-8">
-          {items?.map((item, index) => (
-            <div key={index} className="flex gap-0 flex-col justify-between p-6 border rounded-md">
-              {item.trend === 'up' ? (
-                <MoveUpRight className="w-4 h-4 mb-10 text-primary" />
-              ) : (
-                <MoveDownLeft className="w-4 h-4 mb-10 text-destructive" />
-              )}
-              <h2 className="text-4xl tracking-tighter max-w-xl text-left font-regular flex flex-row gap-4 items-end">
-                {item.value}
-                {item.change && (
-                  <span className="text-muted-foreground text-sm tracking-normal">
-                    {item.change}
-                  </span>
-                )}
-              </h2>
-              <p className="text-base leading-relaxed tracking-tight text-muted-foreground max-w-xl text-left">
-                {item.label}
+            {heading && (
+              <h4 className="text-4xl md:text-6xl font-normal tracking-[-0.03em] leading-[1.05] text-balance max-w-3xl">
+                {heading}
+              </h4>
+            )}
+            {description && (
+              <p className="text-[15px] leading-relaxed text-muted-foreground max-w-[68ch] text-pretty">
+                {description}
               </p>
-            </div>
-          ))}
-        </div>
+            )}
+          </Reveal>
+
+          <RevealGroup className="grid w-full grid-cols-1 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-12">
+            {items?.map((item, index) => (
+              <RevealItem
+                key={index}
+                className="flex flex-col gap-3 border-t border-hairline pt-6"
+              >
+                <div className="flex items-baseline gap-3">
+                  <span className="text-4xl font-normal tracking-[-0.02em] tabular-nums">
+                    {item.value}
+                  </span>
+                  {item.change && (
+                    <span className="font-mono text-[11px] text-muted-foreground">
+                      {item.change}
+                    </span>
+                  )}
+                </div>
+                <div className="flex items-center gap-2">
+                  {item.trend === "up" ? (
+                    <MoveUpRight className="size-3.5 shrink-0 text-primary" />
+                  ) : (
+                    <MoveDownLeft className="size-3.5 shrink-0 text-destructive" />
+                  )}
+                  <p className="text-sm text-muted-foreground text-pretty">
+                    {item.label}
+                  </p>
+                </div>
+              </RevealItem>
+            ))}
+          </RevealGroup>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

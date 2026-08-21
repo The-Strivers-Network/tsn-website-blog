@@ -1,60 +1,62 @@
-import React from 'react'
+import React from "react";
 
-import type { BentoBlock as BentoBlockProps } from '@/payload-types'
+import type { BentoBlock as BentoBlockProps } from "@/payload-types";
 
-import { Badge } from '@/components/ui/badge'
+import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 
 export const BentoBlock: React.FC<BentoBlockProps> = (props) => {
-  const { badge, heading, description, items } = props
+  const { badge, heading, description, items } = props;
 
   return (
-    <div className="w-full py-10 lg:py-20">
+    <div className="w-full py-20 lg:py-28">
       <div className="container mx-auto">
-        <div className="flex flex-col gap-10">
-          <div className="flex gap-4 flex-col">
+        <div className="flex flex-col gap-16">
+          <Reveal className="flex flex-col gap-5">
             {badge && (
-              <div>
-                <Badge variant="outline">{badge}</Badge>
-              </div>
+              <span className="font-mono text-[11px] font-medium text-muted-foreground">
+                {badge}
+              </span>
             )}
-            <div className="flex gap-2 flex-col">
-              <h4 className="text-3xl md:text-5xl tracking-tighter max-w-xl text-left font-regular">
-                {heading}
-              </h4>
-              {description && (
-                <p className="text-lg max-w-xl lg:max-w-lg leading-relaxed tracking-tight text-muted-foreground text-left">
-                  {description}
-                </p>
-              )}
-            </div>
-          </div>
+            <h4 className="text-4xl md:text-6xl font-normal tracking-[-0.03em] leading-[1.05] text-balance max-w-3xl">
+              {heading}
+            </h4>
+            {description && (
+              <p className="text-[15px] leading-relaxed text-muted-foreground max-w-[68ch] text-pretty">
+                {description}
+              </p>
+            )}
+          </Reveal>
 
           {items && items.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <RevealGroup className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               {items.map((item, index) => {
-                const isWide = index % 4 === 0 || index % 4 === 3
+                const isWide = index % 4 === 0 || index % 4 === 3;
                 return (
-                  <div
+                  <RevealItem
                     key={index}
-                    className={`bg-muted rounded-md p-6 aspect-square flex justify-between flex-col ${
-                      isWide ? 'lg:col-span-2 lg:aspect-auto h-full' : ''
-                    }`}
+                    className={
+                      isWide
+                        ? "rounded-2xl border border-hairline bg-card p-6 lg:p-8 surface-highlight transition-[border-color,transform] duration-150 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-hairline-strong hover:-translate-y-0.5 flex flex-col justify-between lg:col-span-2 lg:min-h-[17rem]"
+                        : "rounded-2xl border border-hairline bg-card p-6 lg:p-8 surface-highlight transition-[border-color,transform] duration-150 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-hairline-strong hover:-translate-y-0.5 flex flex-col justify-between lg:min-h-[17rem]"
+                    }
                   >
-                    <div className="flex flex-col">
-                      <h3 className="text-xl tracking-tight">{item.heading}</h3>
+                    <div className="flex flex-col gap-2">
+                      <h3 className="text-lg font-medium tracking-[-0.01em]">
+                        {item.heading}
+                      </h3>
                       {item.description && (
-                        <p className="text-muted-foreground max-w-xs text-base">
+                        <p className="text-sm text-muted-foreground max-w-[68ch] text-pretty">
                           {item.description}
                         </p>
                       )}
                     </div>
-                  </div>
-                )
+                  </RevealItem>
+                );
               })}
-            </div>
+            </RevealGroup>
           )}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
