@@ -36,8 +36,8 @@ export const BentoBlock: React.FC<BentoBlockProps> = (props) => {
                     key={index}
                     className={
                       isWide
-                        ? "rounded-2xl border border-hairline bg-card p-6 lg:p-8 surface-highlight transition-[border-color,transform] duration-150 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-hairline-strong hover:-translate-y-0.5 flex flex-col justify-between lg:col-span-2 lg:min-h-[17rem]"
-                        : "rounded-2xl border border-hairline bg-card p-6 lg:p-8 surface-highlight transition-[border-color,transform] duration-150 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-hairline-strong hover:-translate-y-0.5 flex flex-col justify-between lg:min-h-[17rem]"
+                        ? "rounded-2xl border border-hairline bg-card p-6 lg:p-8 surface-highlight transition-[border-color,transform] duration-150 ease-graphite hover:border-hairline-strong hover:-translate-y-0.5 flex flex-col justify-between lg:col-span-2 lg:min-h-[17rem]"
+                        : "rounded-2xl border border-hairline bg-card p-6 lg:p-8 surface-highlight transition-[border-color,transform] duration-150 ease-graphite hover:border-hairline-strong hover:-translate-y-0.5 flex flex-col justify-between lg:min-h-[17rem]"
                     }
                   >
                     <div className="flex flex-col gap-2">

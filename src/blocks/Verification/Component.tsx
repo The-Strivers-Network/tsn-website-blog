@@ -83,7 +83,7 @@ export const VerificationBlock: React.FC<VerificationBlockProps> = (props) => {
                   typeof qrImage === "object" &&
                   (verifyUrl ? (
                     <a
-                      className="block size-40 rounded-2xl border border-hairline bg-wash p-2 transition-[border-color,transform] duration-150 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-hairline-strong hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                      className="block size-40 rounded-2xl border border-hairline bg-wash p-2 transition-[border-color,transform] duration-150 ease-graphite hover:border-hairline-strong hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                       href={verifyUrl}
                       rel="noopener noreferrer"
                       target="_blank"

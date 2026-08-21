@@ -42,7 +42,7 @@ export const GiveBackCycleBlock: React.FC<GiveBackCycleBlockProps> = (
               return (
                 <RevealItem
                   key={index}
-                  className="relative rounded-2xl border border-hairline bg-card p-6 lg:p-8 surface-highlight transition-[border-color,transform] duration-150 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-hairline-strong hover:-translate-y-0.5"
+                  className="relative rounded-2xl border border-hairline bg-card p-6 lg:p-8 surface-highlight transition-[border-color,transform] duration-150 ease-graphite hover:border-hairline-strong hover:-translate-y-0.5"
                 >
                   <span className="font-mono text-[11px] text-muted-foreground">
                     {String(index + 1).padStart(2, "0")}

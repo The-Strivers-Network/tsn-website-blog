@@ -103,7 +103,7 @@ export const ContactInfoBlock = async (props: ContactInfoBlockProps) => {
               <RevealItem>
                 <a
                   href={`mailto:${email}`}
-                  className="block rounded-2xl border border-hairline bg-card p-6 lg:p-8 surface-highlight transition-[border-color,transform] duration-150 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-hairline-strong hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="block rounded-2xl border border-hairline bg-card p-6 lg:p-8 surface-highlight transition-[border-color,transform] duration-150 ease-graphite hover:border-hairline-strong hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <Mail className="size-4 text-muted-foreground" />
                   <span className="mt-8 block font-mono text-[11px] text-muted-foreground">
