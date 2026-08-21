@@ -1,40 +1,46 @@
-import type { CollectionConfig } from 'payload';
+import type { CollectionConfig } from "payload";
 
-import { hero } from '@/heros/config';
-import { slugField } from 'payload';
-import { authenticatedOrPublished } from '../../access/authenticatedOrPublished';
-import { Archive } from '../../blocks/ArchiveBlock/config';
-import { Bento } from '../../blocks/Bento/config';
-import { CallToAction } from '../../blocks/CallToAction/config';
-import { Content } from '../../blocks/Content/config';
-import { FAQBlock } from '../../blocks/FAQBlock/config';
-import { FormBlock } from '../../blocks/Form/config';
-import { MediaBlock } from '../../blocks/MediaBlock/config';
-import { ParagraphBlock } from '../../blocks/Paragraph/config';
-import { ScholarCaseStudy } from '../../blocks/ScholarCaseStudy/config';
-import { ScholarList } from '../../blocks/ScholarList/config';
-import { ScrollItems } from '../../blocks/ScrollItems/config';
-import { StatsBlock } from '../../blocks/StatsBlock/config';
-import { TeamBlock } from '../../blocks/TeamBlock/config';
-import { Testimonials } from '../../blocks/Testimonials/config';
-import { populatePublishedAt } from '../../hooks/populatePublishedAt';
-import { generatePreviewPath } from '../../utilities/generatePreviewPath';
-import { revalidateDelete, revalidatePage } from './hooks/revalidatePage';
+import { hero } from "@/heros/config";
+import { slugField } from "payload";
+import { authenticatedOrPublished } from "../../access/authenticatedOrPublished";
+import { AdmissionsMap } from "../../blocks/AdmissionsMap/config";
+import { Archive } from "../../blocks/ArchiveBlock/config";
+import { Bento } from "../../blocks/Bento/config";
+import { CallToAction } from "../../blocks/CallToAction/config";
+import { CaseStudies } from "../../blocks/CaseStudies/config";
+import { ContactBlock } from "../../blocks/ContactInfo/config";
+import { Content } from "../../blocks/Content/config";
+import { FAQBlock } from "../../blocks/FAQBlock/config";
+import { FeatureSplit } from "../../blocks/FeatureSplit/config";
+import { FormBlock } from "../../blocks/Form/config";
+import { GiveBackCycle } from "../../blocks/GiveBackCycle/config";
+import { MediaBlock } from "../../blocks/MediaBlock/config";
+import { ParagraphBlock } from "../../blocks/Paragraph/config";
+import { PipelineSteps } from "../../blocks/PipelineSteps/config";
+import { ScholarDirectory } from "../../blocks/ScholarDirectory/config";
+import { ScrollItems } from "../../blocks/ScrollItems/config";
+import { StatsBlock } from "../../blocks/StatsBlock/config";
+import { TeamBlock } from "../../blocks/TeamBlock/config";
+import { Testimonials } from "../../blocks/Testimonials/config";
+import { Verification } from "../../blocks/Verification/config";
+import { populatePublishedAt } from "../../hooks/populatePublishedAt";
+import { generatePreviewPath } from "../../utilities/generatePreviewPath";
+import { revalidateDelete, revalidatePage } from "./hooks/revalidatePage";
 
-import admin from '@/access/admin';
+import admin from "@/access/admin";
 import {
   MetaDescriptionField,
   MetaImageField,
   MetaTitleField,
   OverviewField,
   PreviewField,
-} from '@payloadcms/plugin-seo/fields';
+} from "@payloadcms/plugin-seo/fields";
 
-export const Pages: CollectionConfig<'pages'> = {
-  slug: 'pages',
+export const Pages: CollectionConfig<"pages"> = {
+  slug: "pages",
   labels: {
-    singular: 'Page',
-    plural: 'Pages',
+    singular: "Page",
+    plural: "Pages",
   },
   trash: true,
   access: {
@@ -51,56 +57,62 @@ export const Pages: CollectionConfig<'pages'> = {
     slug: true,
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    defaultColumns: ["title", "slug", "updatedAt"],
     livePreview: {
       url: ({ data, req }) =>
         generatePreviewPath({
           slug: data?.slug,
-          collection: 'pages',
+          collection: "pages",
           req,
         }),
     },
     preview: (data, { req }) =>
       generatePreviewPath({
         slug: data?.slug as string,
-        collection: 'pages',
+        collection: "pages",
         req,
       }),
-    useAsTitle: 'title',
+    useAsTitle: "title",
   },
   fields: [
     {
-      name: 'title',
-      type: 'text',
+      name: "title",
+      type: "text",
       required: true,
     },
     {
-      type: 'tabs',
+      type: "tabs",
       tabs: [
         {
           fields: [hero],
-          label: 'Hero',
+          label: "Hero",
         },
         {
           fields: [
             {
-              name: 'layout',
-              type: 'blocks',
+              name: "layout",
+              type: "blocks",
               blocks: [
-                CallToAction,
-                Content,
-                MediaBlock,
+                AdmissionsMap,
                 Archive,
-                FormBlock,
                 Bento,
+                CallToAction,
+                CaseStudies,
+                ContactBlock,
+                Content,
                 FAQBlock,
+                FeatureSplit,
+                FormBlock,
+                GiveBackCycle,
+                MediaBlock,
                 ParagraphBlock,
-                ScholarCaseStudy,
-                ScholarList,
+                PipelineSteps,
+                ScholarDirectory,
                 ScrollItems,
                 StatsBlock,
                 TeamBlock,
                 Testimonials,
+                Verification,
               ],
               required: true,
               admin: {
@@ -108,22 +120,22 @@ export const Pages: CollectionConfig<'pages'> = {
               },
             },
           ],
-          label: 'Content',
+          label: "Content",
         },
         {
-          name: 'meta',
-          label: 'SEO',
+          name: "meta",
+          label: "SEO",
           fields: [
             OverviewField({
-              titlePath: 'meta.title',
-              descriptionPath: 'meta.description',
-              imagePath: 'meta.image',
+              titlePath: "meta.title",
+              descriptionPath: "meta.description",
+              imagePath: "meta.image",
             }),
             MetaTitleField({
               hasGenerateFn: true,
             }),
             MetaImageField({
-              relationTo: 'media',
+              relationTo: "media",
             }),
 
             MetaDescriptionField({}),
@@ -132,18 +144,18 @@ export const Pages: CollectionConfig<'pages'> = {
               hasGenerateFn: true,
 
               // field paths to match the target field for data
-              titlePath: 'meta.title',
-              descriptionPath: 'meta.description',
+              titlePath: "meta.title",
+              descriptionPath: "meta.description",
             }),
           ],
         },
       ],
     },
     {
-      name: 'publishedAt',
-      type: 'date',
+      name: "publishedAt",
+      type: "date",
       admin: {
-        position: 'sidebar',
+        position: "sidebar",
       },
     },
     slugField(),
