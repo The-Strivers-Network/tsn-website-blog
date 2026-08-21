@@ -55,6 +55,7 @@
     "clsx": "^2.1.1",
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
+    "dotted-map": "^3.1.0",
     "embla-carousel-react": "^8.6.0",
     "geist": "^1.7.2",
     "graphql": "^16.14.2",
