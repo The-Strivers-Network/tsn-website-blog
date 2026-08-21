@@ -14,6 +14,32 @@ export const CallToAction: Block = {
   interfaceName: 'CallToActionBlock',
   fields: [
     {
+      name: 'variant',
+      type: 'select',
+      defaultValue: 'row',
+      options: [
+        { label: 'Row', value: 'row' },
+        { label: 'Centered card', value: 'centeredCard' },
+      ],
+      admin: {
+        description: 'Row keeps the inline layout. Centered card is the large standalone panel.',
+      },
+    },
+    {
+      name: 'badge',
+      type: 'text',
+      admin: {
+        condition: (_, siblingData) => siblingData?.variant === 'centeredCard',
+      },
+    },
+    {
+      name: 'heading',
+      type: 'text',
+      admin: {
+        condition: (_, siblingData) => siblingData?.variant === 'centeredCard',
+      },
+    },
+    {
       name: 'richText',
       type: 'richText',
       editor: lexicalEditor({

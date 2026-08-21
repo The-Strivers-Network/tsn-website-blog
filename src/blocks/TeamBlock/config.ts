@@ -55,6 +55,13 @@ export const TeamBlock: Block = {
               type: 'text',
             },
             {
+              name: 'quote',
+              type: 'textarea',
+              admin: {
+                description: 'Optional short quote shown beneath the role',
+              },
+            },
+            {
               name: 'avatar',
               type: 'upload',
               relationTo: 'media',
