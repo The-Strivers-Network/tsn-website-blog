@@ -12,6 +12,8 @@ import { Pages } from './collections/Pages';
 import { Posts } from './collections/Posts';
 import { Comments } from './collections/Comments';
 import { Users } from './collections/Users';
+import { Scholars } from './collections/Scholars';
+import { Universities } from './collections/Universities';
 import { Footer } from './Footer/config';
 import { Header } from './Header/config';
 import { plugins } from './plugins';
@@ -91,7 +93,7 @@ export default buildConfig({
       connectionString: process.env.POSTGRES_URL || '',
     },
   }),
-  collections: [Pages, Posts, Comments, Media, Categories, Users],
+  collections: [Pages, Posts, Comments, Media, Categories, Users, Universities, Scholars],
   cors: [
     getServerSideURL(),
     // Allow Vercel preview deployments
