@@ -83,6 +83,10 @@ export default buildConfig({
   // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
   db: vercelPostgresAdapter({
+    // Target is the live Neon branch. `push` defaults to true in development,
+    // which would mutate production schema on `pnpm dev`. Schema changes ship
+    // through reviewed migrations only.
+    push: false,
     pool: {
       connectionString: process.env.POSTGRES_URL || '',
     },
