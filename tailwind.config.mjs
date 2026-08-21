@@ -92,9 +92,12 @@ const config = {
         success: 'hsl(var(--success))',
         error: 'hsl(var(--error))',
         warning: 'hsl(var(--warning))',
+        hairline: 'var(--hairline)',
+        'hairline-strong': 'var(--hairline-strong)',
+        wash: 'var(--wash)',
       },
       fontFamily: {
-        mono: ['ui-monospace', 'SF Mono', 'Consolas', 'monospace'],
+        mono: ['var(--font-geist-mono)', 'ui-monospace', 'SF Mono', 'Consolas', 'monospace'],
         sans: ['var(--font-geist-sans)', 'sans-serif'],
         title: ['var(--font-geist-sans)', 'sans-serif'],
       },

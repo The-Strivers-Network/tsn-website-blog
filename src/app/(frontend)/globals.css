@@ -18,33 +18,43 @@
   }
 
   :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
+    /*
+     * Tailwind consumes these as `hsl(var(--token))`, so the values must be
+     * HSL component triplets rather than oklch() functions.
+     */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
 
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
+    --card: 0 0% 98%;
+    --card-foreground: 0 0% 10%;
 
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
 
-    --primary: oklch(0.541 0.281 293.009);
-    --primary-foreground: oklch(0.969 0.016 293.756);
+    /* Neutral primary keeps the header visually frozen in light mode. */
+    --primary: 0 0% 10%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: oklch(0.967 0.001 286.375);
-    --secondary-foreground: oklch(0.21 0.006 285.885);
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 6% 10%;
 
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
+    --muted: 0 0% 97%;
+    --muted-foreground: 0 0% 40%;
 
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
+    --accent: 0 0% 97%;
+    --accent-foreground: 0 0% 12%;
 
-    --destructive: oklch(0.58 0.22 27);
+    --destructive: 8 78% 50%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
+    --border: 0, 0%, 0%, 0.1;
+    --input: 0 0% 89%;
+    --ring: 0 0% 60%;
+
+    --hairline: rgba(0, 0, 0, 0.1);
+    --hairline-strong: rgba(0, 0, 0, 0.18);
+    --wash: rgba(0, 0, 0, 0.03);
+    --highlight: rgba(255, 255, 255, 0.9);
 
     --radius: 0.625rem;
 
@@ -67,10 +77,10 @@
   }
 
   [data-theme='dark'] {
-    --background: 0 0% 0%;
+    --background: 0 0% 4%;
     --foreground: 210 40% 98%;
 
-    --card: 0 0% 4%;
+    --card: 0 0% 10%;
     --card-foreground: 210 40% 98%;
 
     --popover: 222.2 84% 4.9%;
@@ -83,7 +93,7 @@
     --secondary-foreground: 210 40% 98%;
 
     --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted-foreground: 0 0% 63%;
 
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
@@ -91,9 +101,14 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 0, 0%, 15%, 0.8;
+    --border: 0, 0%, 100%, 0.07;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
+    --hairline: rgba(255, 255, 255, 0.07);
+    --hairline-strong: rgba(255, 255, 255, 0.14);
+    --wash: rgba(255, 255, 255, 0.02);
+    --highlight: rgba(255, 255, 255, 0.04);
 
     --success: 196 100% 14%;
     --warning: 34 51% 25%;
@@ -159,6 +174,11 @@
     -o-user-drag: none;
     user-select: none;
   }
+}
+
+/* Theme-aware top-edge catch light for raised surfaces. */
+.surface-highlight {
+  box-shadow: inset 0 1px 0 var(--highlight);
 }
 
 html {
